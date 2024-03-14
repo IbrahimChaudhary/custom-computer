@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import Nav from "@/components/nav";
+import { Footer } from "@/components/footer";
+import { HeaderMenu } from "@/components/nav2";
+import { ClerkProvider } from "@clerk/nextjs";
+
+import "@mantine/core/styles.css";
+import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +22,23 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <ColorSchemeScript />
+
+        <body
+          className={`${inter.className} bg-black flex justify-center w-full relative`}
+        >
+          <MantineProvider>
+            <div className="w-full max-w-[1440px] flex flex-col ">
+              {/* <Nav></Nav> */}
+              {/* <HeaderMenu></HeaderMenu> */}
+              {children}
+              {/* <Footer></Footer> */}
+            </div>
+          </MantineProvider>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
