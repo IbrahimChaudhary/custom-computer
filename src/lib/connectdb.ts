@@ -2,14 +2,11 @@ import mongoose from "mongoose";
 
 const connectdb = async () => {
   try {
-    if (mongoose.connection.readyState === 0) {
-      if (!process.env.MONGODB_URI) {
-        throw new Error("mongodb connection string not provided");
-      }
-      await mongoose.connect(process.env.MONGODB_URI);
+    await mongoose.connect(
+      "mongodb+srv://ghulam:1234@cluster0.17n9uau.mongodb.net/cc-db?retryWrites=true&w=majority&appName=Cluster0"
+    );
 
-      console.log("database connected");
-    }
+    console.log("database connected 🔥🔥🔥");
   } catch (error) {
     console.log(error);
   }

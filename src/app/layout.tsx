@@ -5,6 +5,7 @@ import Nav from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { HeaderMenu } from "@/components/nav2";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
 
 import "@mantine/core/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
@@ -34,6 +35,8 @@ export default function RootLayout({
               {/* <Nav></Nav> */}
               {/* <HeaderMenu></HeaderMenu> */}
               {children}
+              <Toaster />
+
               {/* <Footer></Footer> */}
             </div>
           </MantineProvider>
