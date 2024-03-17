@@ -15,8 +15,8 @@ const userSchema = new Schema({
       },
       parts: [
         {
-          id: String,
-          type: String,
+          partId: String,
+          partType: String,
         },
       ],
     },

@@ -1,7 +1,13 @@
-export default function SingleBuild() {
+import giveAllPartsInAbuild from "@/lib/give-all-parts-in-a-build";
+export default async function SingleBuild({ params }: { params: any }) {
+  const parts = await giveAllPartsInAbuild(params.buildID);
+  console.log("all parts of  this builld ", parts);
+  console.log(params?.buildID, "form the individual bubild page");
   return (
     <>
-      <div>
+      <div className="mt-44">
+        <div className="text-blue-500">{params?.buildID}</div>
+
         <div>
           {/* <button>delete build</button> */}
           {/* <button>browse components</button> */}

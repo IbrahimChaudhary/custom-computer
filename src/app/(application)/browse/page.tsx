@@ -5,7 +5,6 @@ import showAllBuildsOfAUser from "@/lib/showAllBuildsOfAUser";
 export default async function Browse() {
   const data = await giveAllParts();
   const allBuilds = await showAllBuildsOfAUser();
-  // console.log("...............................", allBuilds);
   return (
     <>
       <div className="pt-24">
@@ -16,6 +15,7 @@ export default async function Browse() {
           {data?.map((item) => {
             return (
               <BrowseCard
+                partId={ item._id.toString()}
                 builds={allBuilds}
                 name={item.name}
                 price={item.price}

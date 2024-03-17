@@ -21,7 +21,10 @@ export default async function RootLayout({
         className={`${inter.className} bg-black flex justify-center w-full relative`}
       >
         <div className="w-full max-w-[1440px] flex flex-col ">
-          <ClerkProvider>{children}</ClerkProvider>
+          <ClerkProvider>
+            {children}
+            <Toaster></Toaster>
+          </ClerkProvider>
         </div>
       </body>
     </html>

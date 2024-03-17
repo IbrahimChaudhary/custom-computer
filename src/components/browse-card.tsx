@@ -5,6 +5,7 @@ import MoreInfoDialog from "./more-info-dialog";
 import { buildT } from "@/types/build-type";
 type buildCardPropsT = {
   image?: string;
+  partId: string;
   price: number;
   name: string;
   type: string;
@@ -16,8 +17,10 @@ export default function BrowseCard({
   name,
   type,
   builds,
+  partId,
 }: buildCardPropsT) {
-  console.log("................in the card............", builds);
+  console.log(partId, type, "in the browser card ......");
+
   return (
     <>
       <div className="border p-8 bg-green-400">
@@ -39,7 +42,11 @@ export default function BrowseCard({
               <Button>add to build</Button>
             </DialogTrigger>
             <DialogContent>
-              <AddToBuildDialog builds={builds}></AddToBuildDialog>
+              <AddToBuildDialog
+                partId={partId}
+                partType={type}
+                builds={builds}
+              ></AddToBuildDialog>
             </DialogContent>
           </Dialog>
         </div>
