@@ -3,10 +3,10 @@ import { currentUser } from "@clerk/nextjs";
 import User from "@/schemas/server/user-server-schema";
 export default async function showAllBuildsOfAUser() {
   try {
+    // const user = await currentUser();
     await connectdb();
-    const user = await currentUser();
     const res = await User.findOne(
-      { userEmail: user?.emailAddresses[0].emailAddress },
+      { userEmail: "ilyasghulam35@gmail.com" },
       { builds: 1, _id: 0 }
     );
     if (!res) {
