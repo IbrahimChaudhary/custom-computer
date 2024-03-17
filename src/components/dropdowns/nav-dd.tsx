@@ -1,21 +1,17 @@
+import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { currentUser } from "@clerk/nextjs";
 import { SignOutButton } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import Tracking from "../tracking";
+
 import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
   DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -44,7 +40,14 @@ export default async function NavDD() {
         <Link href="/cart">
           <DropdownMenuItem>cart</DropdownMenuItem>
         </Link>
-        <DropdownMenuItem>tracking</DropdownMenuItem>
+        <Dialog>
+          <DialogTrigger>
+            <Button>tracking</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <Tracking />
+          </DialogContent>
+        </Dialog>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <SignOutButton></SignOutButton>

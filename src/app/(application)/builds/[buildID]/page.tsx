@@ -1,5 +1,6 @@
 import giveAllPartsInAbuild from "@/lib/give-all-parts-in-a-build";
 import PutInCart from "@/components/put-in-cart";
+import { nanoid } from "nanoid";
 import RemoveFromCart from "@/components/remove-from-cart";
 export default async function SingleBuild({ params }: { params: any }) {
   const parts = await giveAllPartsInAbuild(params.buildID);
@@ -15,9 +16,11 @@ export default async function SingleBuild({ params }: { params: any }) {
           {/* <button>browse components</button> */}
         </div>
         <div>
-          {parts.map((part: any) => {
-            return <div>{JSON.stringify(part)}</div>;
-          })}
+          {parts
+            ? parts?.map((part: any) => {
+                return <div key={nanoid()}>{JSON.stringify(part)}</div>;
+              })
+            : null}
         </div>
 
         <div>

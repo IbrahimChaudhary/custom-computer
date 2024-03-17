@@ -14,12 +14,8 @@ export default async function Build() {
         <div className="flex gap-4 my-8">
           {allBuilds?.map((build: buildT) => {
             return (
-              <Link href={`/builds/${build._id}`}>
-                <BuildCard
-                  buildId={build._id.toString()}
-                  name={build.name}
-                  key={nanoid()}
-                />
+              <Link href={`/builds/${build._id}`} key={nanoid()}>
+                <BuildCard buildId={build._id.toString()} name={build.name} />
               </Link>
             );
           })}

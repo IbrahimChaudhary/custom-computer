@@ -9,11 +9,11 @@ export default async function giveAllPartsInAbuild(buildId: string) {
     await connectdb();
 
     const user = await currentUser();
-    let allPartsArray:any = []
+    let allPartsArray: any = [];
     const builds = await User.aggregate([
       {
         $match: {
-          userEmail: "ilyasghulam35@gmail.com",
+          userEmail: user?.emailAddresses[0].emailAddress,
         },
       },
       {
@@ -41,15 +41,15 @@ export default async function giveAllPartsInAbuild(buildId: string) {
 
     const parts = builds[0].build.parts;
 
-   const loopOverBuildParts = async () => {
-     await Promise.all(
-       parts.map(async (element: any) => {
-         if (element.partType === "case") {
-           await findCasePart(element.partId);
-         }
-       })
-     );
-   };
+    const loopOverBuildParts = async () => {
+      await Promise.all(
+        parts.map(async (element: any) => {
+          if (element.partType === "case") {
+            await findCasePart(element.partId);
+          }
+        })
+      );
+    };
 
     await loopOverBuildParts();
 
