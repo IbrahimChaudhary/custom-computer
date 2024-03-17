@@ -3,6 +3,7 @@ import { SignOutButton } from "@clerk/nextjs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
+import Link from "next/link";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,7 +41,9 @@ export default async function NavDD() {
       <DropdownMenuContent className="w-56">
         <DropdownMenuItem>manage account</DropdownMenuItem>
         <DropdownMenuItem>saved builds</DropdownMenuItem>
-        <DropdownMenuItem>cart</DropdownMenuItem>
+        <Link href="/cart">
+          <DropdownMenuItem>cart</DropdownMenuItem>
+        </Link>
         <DropdownMenuItem>tracking</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>

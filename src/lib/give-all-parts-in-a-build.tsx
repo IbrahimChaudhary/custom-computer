@@ -9,7 +9,7 @@ export default async function giveAllPartsInAbuild(buildId: string) {
     await connectdb();
 
     const user = await currentUser();
-    const allPartsArray = [];
+    let allPartsArray:any = []
     const builds = await User.aggregate([
       {
         $match: {
@@ -33,7 +33,27 @@ export default async function giveAllPartsInAbuild(buildId: string) {
     if (builds.length === 0) {
       return false;
     }
-    return builds[0].build.parts;
+    const findCasePart = async (id: string) => {
+      const res = await Case.findOne({ _id: new ObjectId(id) });
+      await allPartsArray.push(res);
+      console.log(allPartsArray, "finding case ---------------0000000");
+    };
+
+    const parts = builds[0].build.parts;
+
+   const loopOverBuildParts = async () => {
+     await Promise.all(
+       parts.map(async (element: any) => {
+         if (element.partType === "case") {
+           await findCasePart(element.partId);
+         }
+       })
+     );
+   };
+
+    await loopOverBuildParts();
+
+    return allPartsArray;
   } catch (error) {
     console.log("ERROR WHILE FETCHING PARTS OF A BUILD :  ", error);
   }
