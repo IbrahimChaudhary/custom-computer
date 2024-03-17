@@ -18,11 +18,9 @@ export default async function removeFromCartAction(buildID: string) {
     );
 
     if (result.modifiedCount === 0) {
-      console.log("No matching document found to update.");
       return false;
     }
 
-    console.log("Build removed from cart successfully.");
     revalidatePath("/", "layout");
     return true;
   } catch (error) {

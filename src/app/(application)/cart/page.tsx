@@ -1,6 +1,9 @@
 import giveInCartBuilds from "@/lib/give-in-cart-builds";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Checkout from "@/components/checkout-modal";
+import checkoutModal from "@/components/checkout-modal";
+import RemoveFromCart from "@/components/remove-from-cart";
 export default async function Cart() {
   const inCartBuilds = await giveInCartBuilds();
   console.log("$$$$$$$$$$$", inCartBuilds);
@@ -17,8 +20,10 @@ export default async function Cart() {
                     <Link href="/browse">
                       <Button>browse more</Button>
                     </Link>
-                    <Button>checkout</Button>
-                    <Button>remove from cart</Button>
+                    <Checkout buildID={item.builds._id.toString()} />
+                    <RemoveFromCart
+                      buildID={item.builds._id.toString()}
+                    ></RemoveFromCart>
                   </div>
                 );
               })

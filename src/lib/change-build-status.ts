@@ -21,11 +21,9 @@ export default async function changeBuildStatus(
     );
 
     if (result.modifiedCount === 0) {
-      console.log("No matching document found to update.");
       return false;
     }
 
-    console.log(`changed build status to ${newStatus}`);
     revalidatePath("/", "layout");
     return true;
   } catch (error) {
