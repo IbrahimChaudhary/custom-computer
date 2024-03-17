@@ -1,3 +1,4 @@
+'use server'
 import connectdb from "@/lib/connectdb";
 
 export default async function FansAction() {

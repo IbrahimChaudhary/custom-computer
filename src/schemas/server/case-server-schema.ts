@@ -9,6 +9,10 @@ const caseSchema = new Schema({
   side_panel: String,
   external_volume: Number,
   internal_35_bays: Number,
+  created_at: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
 // Use mongoose.models.Case to check if the model already exists
