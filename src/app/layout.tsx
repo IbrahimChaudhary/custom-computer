@@ -4,7 +4,7 @@ import Nav from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
-
+import NextTopLoaderProvider from "@/providers/next-top-loader-provider";
 import "@mantine/core/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 
@@ -21,10 +21,12 @@ export default async function RootLayout({
         className={`${inter.className} bg-slate-950 flex justify-center w-full relative`}
       >
         <div>
-          <ClerkProvider>
-            {children}
-            <Toaster></Toaster>
-          </ClerkProvider>
+          <NextTopLoaderProvider>
+            <ClerkProvider>
+              {children}
+              <Toaster></Toaster>
+            </ClerkProvider>
+          </NextTopLoaderProvider>
         </div>
       </body>
     </html>
