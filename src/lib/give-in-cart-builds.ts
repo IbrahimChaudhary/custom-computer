@@ -1,5 +1,3 @@
-"use server";
-
 import { currentUser } from "@clerk/nextjs";
 import connectdb from "./connectdb";
 import User from "@/schemas/server/user-server-schema";

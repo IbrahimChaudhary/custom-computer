@@ -1,3 +1,4 @@
+'use server'
 import connectdb from "./connectdb";
 import { auth } from "@clerk/nextjs";
 import User from "@/schemas/server/user-server-schema";
