@@ -6,7 +6,7 @@ export default async function Nav() {
   const user = await currentUser();
   return (
     <>
-      <div className="flex fixed z-20 w-full max-w-[1440px]  justify-around items-center  py-4 backdrop-blur-[126px] bg-opacity-20  ">
+      <div className="flex fixed z-20 w-full   justify-around items-center bg-black  py-4 backdrop-blur-[126px] bg-opacity-20  ">
         <div>custom_computers</div>
         <div className="flex gap-4">
           <Link href="/"> home</Link>

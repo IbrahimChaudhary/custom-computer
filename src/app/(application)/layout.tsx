@@ -8,10 +8,12 @@ export default async function ApplicationLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
+    <section className="">
       <Nav></Nav>
-      {children}
-      <Footer></Footer>
+      <div className="w-full  flex flex-col justify-center items-center ">
+        {children}
+        <Footer></Footer>
+      </div>
     </section>
   );
 }

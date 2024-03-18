@@ -18,9 +18,9 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} bg-black flex justify-center w-full relative`}
+        className={`${inter.className} bg-slate-950 flex justify-center w-full relative`}
       >
-        <div className="w-full max-w-[1440px] flex flex-col ">
+        <div>
           <ClerkProvider>
             {children}
             <Toaster></Toaster>
