@@ -19,14 +19,15 @@ export default async function NavDD() {
   const user = await currentUser();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger className="bg-transparent text-white" asChild>
         <Button variant="default" className="gap-2 ">
-          <Avatar>
+          <Avatar className="w-[30px] h-[30px]">
             <AvatarImage
-              width={10}
-              height={10}
+              width={5}
+              height={5}
               src={user?.imageUrl}
               alt="@shadcn"
+              className=" aspect-auto"
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>

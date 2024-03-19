@@ -8,10 +8,15 @@ export default async function Build() {
   const allBuilds = await showAllBuildsOfAUser();
   return (
     <>
-      <div className="pt-20 bg-purple-500">
-        <CreateANewBuildPage />
-        <div>saved builds</div>
-        <div className="flex gap-4 my-8">
+      <div className="pt-20 w-full max-w-[1440px] px-8 mt-8">
+        <div className="w-full  flex justify-between items-center   ">
+          <h1 className="text-7xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text font-semibold">
+            Your builds
+          </h1>
+
+          <CreateANewBuildPage />
+        </div>
+        <div className="flex gap-16 mt-20 mb-4">
           {allBuilds?.map((build: buildT) => {
             return (
               <Link href={`/builds/${build._id}`} key={nanoid()}>

@@ -9,6 +9,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { toast } from "@/components/ui/use-toast";
+import { EvervaultCard, Icon } from "@/components/ui/evervault-card";
 
 import { Button } from "./ui/button";
 import deleteBuildAction from "@/actions/delete-build-action";
@@ -37,15 +38,20 @@ export default function BuildCard({ name, buildId }: BuiddCardPropsT) {
   };
   return (
     <>
-      <div className=" flex gap-8 justify-center items-center border p-8 bg-pink-500 text-black">
-        <div>{name}</div>
+      <div className="border border-white/[0.2] flex  flex-col items-start max-w-sm mx-auto p-4  relative h-[20rem]">
+        <Icon className="absolute h-6 w-6 -top-3 -left-3 text-white " />
+        <Icon className="absolute h-6 w-6 -bottom-3 -left-3 text-white " />
+        <Icon className="absolute h-6 w-6 -top-3 -right-3 text-white " />
+        <Icon className="absolute h-6 w-6 -bottom-3 -right-3 text-white " />
+        <EvervaultCard text={name} />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">...</Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuItem onSelect={handleDelete}>delete</DropdownMenuItem>
-            
+
             <Dialog>
               <DialogTrigger>
                 <Button>edit</Button>

@@ -1,7 +1,7 @@
 export default function Forum() {
   return (
     <>
-      <div>forum page</div>
+      <div className="w-full"></div>
     </>
   );
 }

@@ -7,15 +7,15 @@ export default async function Browse() {
   const allBuilds = await showAllBuildsOfAUser();
   return (
     <>
-      <div className="pt-24">
-        <div>
+      <div className="pt-24 w-full px-8 max-w-[1440px] ">
+        <div className="w-full">
           <UserSelectCategory></UserSelectCategory>
         </div>
-        <div>
+        <div className="flex gap-x-6 flex-wrap">
           {data?.map((item) => {
             return (
               <BrowseCard
-                partId={ item._id.toString()}
+                partId={item._id.toString()}
                 builds={allBuilds}
                 name={item.name}
                 price={item.price}
