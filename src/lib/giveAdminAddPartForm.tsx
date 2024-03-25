@@ -9,13 +9,14 @@ import NetworkCardForm from "@/components/forms/network-card-form";
 import PowerSupplyForm from "@/components/forms/power-supply-form";
 import StorageForm from "@/components/forms/storage-form";
 import NoAdminFormSelected from "@/components/no-admin-form-selected";
+import { CategoriesT } from "@/types/categories-type";
 export default function giveAdminAddPartForm(
-  selectedValue: string
+  selectedValue: CategoriesT["categories"]
 ): JSX.Element {
   switch (selectedValue) {
     case "case":
       return <CaseForm />;
-    case "cpu":
+    case "Cpu":
       return <CpuForm />;
     case "cpu-cooler":
       return <CpuCoolerForm />;

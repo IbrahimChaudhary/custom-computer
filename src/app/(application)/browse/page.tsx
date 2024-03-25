@@ -2,6 +2,8 @@ import giveAllParts from "@/lib/giveAllParts";
 import BrowseCard from "@/components/browse-card";
 import { UserSelectCategory } from "@/components/user-select-category";
 import showAllBuildsOfAUser from "@/lib/showAllBuildsOfAUser";
+import UserSelectCategoryWrapper from "@/components/user-select-category-wrapper";
+import SelectCategory from "@/components/select-category";
 export default async function Browse() {
   const data = await giveAllParts();
   const allBuilds = await showAllBuildsOfAUser();
@@ -9,7 +11,7 @@ export default async function Browse() {
     <>
       <div className="pt-24 w-full px-8 max-w-[1440px] ">
         <div className="w-full">
-          <UserSelectCategory></UserSelectCategory>
+          <UserSelectCategoryWrapper />
         </div>
         <div className="flex gap-x-6 flex-wrap">
           {data?.map((item) => {

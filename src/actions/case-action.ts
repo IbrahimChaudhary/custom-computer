@@ -5,11 +5,13 @@ import { caseClientSchema } from "@/schemas/client/case-client-schema";
 import Case from "@/schemas/server/case-server-schema";
 
 export default async function CaseAction(
-  data: z.infer<typeof caseClientSchema>
+  data: z.infer<typeof caseClientSchema>,
+  image: string
 ) {
   try {
     await connectdb();
     const res = await Case.create({
+      image,
       name: data.name,
       price: data.price,
       type: data.type,

@@ -1,6 +1,10 @@
 import mongoose, { Schema } from "mongoose";
 
 const caseSchema = new Schema({
+  image: {
+    type: String,
+    default: "",
+  },
   name: String,
   price: Number,
   type: String,

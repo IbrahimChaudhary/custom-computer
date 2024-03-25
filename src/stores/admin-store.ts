@@ -1,13 +1,34 @@
 import { create } from "zustand";
-export const useAdminStore = create((set) => ({
+import { CategoriesT } from "@/types/categories-type";
+export type AdminStoreT = {
+  adminSelectedCategory: CategoriesT["categories"];
+  userSelectedCategory: CategoriesT["categories"];
+  adminSelectedCategoryForFilter: CategoriesT["categories"];
+
+  setAdminSelectedCategory: (
+    selectedCategory: CategoriesT["categories"]
+  ) => void;
+  setUserSelectedCategory: (
+    selectedCategory: CategoriesT["categories"]
+  ) => void;
+  setAdminSelectedCategoryForFilter: (
+    selectedCategory: CategoriesT["categories"]
+  ) => void;
+
+};
+export const useAdminStore = create<AdminStoreT>((set) => ({
   adminSelectedCategory: "none",
+  adminSelectedCategoryForFilter: "none",
+  userSelectedCategory: "none",
 
-  //   toggleSearchWindow: () =>
-  //     set((state: any) => ({ isSearchActive: !state.isSearchActive })),
+  setUserSelectedCategory: (selectedPackage) =>
+    set(() => ({ userSelectedCategory: selectedPackage })),
 
-  setAdminSelectedCategory: (selectedCategory: string) =>
-    set((state: any) => ({ adminSelectedCategory: selectedCategory })),
+  setAdminSelectedCategoryForFilter: (selectedPackage) =>
+    set(() => ({ adminSelectedCategoryForFilter: selectedPackage })),
+  
+
+  setAdminSelectedCategory: (selectedCategory) =>
+    set(() => ({ adminSelectedCategory: selectedCategory })),
 }));
 
-// changeCurrentPackage: (selectedPackage: string) =>
-//     set((state: any) => ({ currentPackage: selectedPackage })),

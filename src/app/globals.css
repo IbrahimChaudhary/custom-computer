@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 input {
-  color: black;
+  color: white;
 }
 
 @layer base {
