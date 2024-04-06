@@ -24,6 +24,7 @@ const config = {
     },
     extend: {
       colors: {
+        mono: "var(--mono)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -58,11 +59,7 @@ const config = {
           foreground: "hsl(var(--card-foreground))",
         },
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
-      },
+
       keyframes: {
         "accordion-down": {
           from: { height: "0" },
@@ -93,3 +90,11 @@ function addVariablesForColors({ addBase, theme }: any) {
 }
 
 export default config;
+
+{
+  /*borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },*/
+}

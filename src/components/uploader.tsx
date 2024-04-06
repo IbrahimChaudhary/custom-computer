@@ -44,6 +44,7 @@ export default function PhotosUploader({
       if (files[i].size > MAX_FILE_SIZE) {
         throw new Error("File size should not exceed 7MB");
       }
+      
       if (!files[i].type.startsWith("image/")) {
         throw new Error("Uploaded file is not an image");
       }

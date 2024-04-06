@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const cpuFormSchema = z.object({
+export const cpuClientSchema = z.object({
   name: z.string().min(2, {
     message: "Name must be at least 2 characters long.",
   }),

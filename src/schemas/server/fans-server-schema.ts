@@ -1,44 +1,53 @@
 import mongoose from "mongoose";
 
 const fanSchema = new mongoose.Schema({
+  image: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/gamma1199/image/upload/v1712267899/fan_bqk7g1.webp",
+  },
   name: {
     type: String,
     required: true,
+    default: null,
   },
   price: {
     type: Number,
     required: true,
+    default: null,
   },
   size: {
     type: Number,
     required: true,
+    default: null,
   },
   color: {
     type: String,
-    default: "",
+    required: true,
+    default: null,
   },
   rpm: {
-    type: [Number],
+    type: Number,
     required: true,
+    default: null,
   },
   airflow: {
-    type: Number,
+    type: [Number],
+    required: true,
     default: null,
   },
   noise_level: {
-    type: Number,
+    type: [Number],
+    required: true,
     default: null,
   },
   pwm: {
     type: Boolean,
-    default: false,
-  },
-  created_at: {
-    type: Date,
-    default: Date.now,
+    required: true,
+    default: null,
   },
 });
 
-const Fan = mongoose.models.Fan || mongoose.model("fan", fanSchema);
+const Fan = mongoose.models.fan || mongoose.model("fan", fanSchema);
 
 export default Fan;

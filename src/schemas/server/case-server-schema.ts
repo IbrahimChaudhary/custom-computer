@@ -3,7 +3,8 @@ import mongoose, { Schema } from "mongoose";
 const caseSchema = new Schema({
   image: {
     type: String,
-    default: "",
+    default:
+      "https://res.cloudinary.com/gamma1199/image/upload/v1712220160/case_kjdrzx.webp",
   },
   name: String,
   price: Number,

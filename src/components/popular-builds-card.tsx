@@ -3,33 +3,54 @@ import React from "react";
 import { BackgroundGradient } from "./ui/background-gradient";
 import { IconAppWindow } from "@tabler/icons-react";
 import Image from "next/image";
+import GradientText from "./gradient-text";
+import { MoveRight } from "lucide-react";
 
-export function PopularBuildsCard() {
+type PopularBuildsCardPropsT = {
+  status: string;
+  name: string;
+  description: string;
+  price: number;
+  buildLink: string;
+  children: React.ReactNode;
+  imageLink: string;
+};
+
+export function PopularBuildsCard({
+  status,
+  name,
+  description,
+  price,
+  buildLink,
+  imageLink,
+  children,
+}: PopularBuildsCardPropsT) {
   return (
-    <div>
-      <BackgroundGradient className="rounded-[22px] max-w-sm p-4 sm:p-10 bg-zinc-900">
+    <div className="flex flex-col w-[80%]  ">
+      <BackgroundGradient className="  rounded-[22px]  p-4 sm:p-10 bg-zinc-900 flex gap-48 items-center ">
         <Image
-          src={`/bg-image-2.jpg`}
+          src={imageLink}
           alt="jordans"
-          height="400"
+          height="30"
           width="400"
           className="object-contain"
         />
-        <p className="text-base sm:text-xl  mt-4 mb-2 text-neutral-200">
-          Air Jordan 4 Retro Reimagined
-        </p>
+        <div className="flex flex-col w-full  ">
+          <div className="flex justify-between mb-8 flex-row-reverse items-center">
+            <div className="  border-mono border-b-2 text-mono text-3xl font-medium">
+              {price}$
+            </div>
+            <p className="text-6xl font-bold italic ">{status}</p>
+          </div>
+          <GradientText size="text-3xl">{name}</GradientText>
 
-        <p className="text-sm text-neutral-400">
-          The Air Jordan 4 Retro Reimagined Bred will release on Saturday,
-          February 17, 2024. Your best opportunity to get these right now is by
-          entering raffles and waiting for the official releases.
-        </p>
-        <button className="rounded-full pl-4 pr-1 py-1 text-white flex items-center space-x-1 bg-black mt-4 text-xs font-bold dark:bg-zinc-800">
-          <span>Buy now </span>
-          <span className="bg-zinc-700 rounded-full text-[0.6rem] px-2 py-0 text-white">
-            $100
-          </span>
-        </button>
+          <div className="w-[80%] flex flex-col gap-4 mt-4">{children}</div>
+
+          <button className="bg-blue-600 font-bold hover:opacity-80 transition-all hover:scale-105  gap-3 flex justify-center items-center mt-12 py-2">
+            view build
+            <MoveRight className="w-[30px] h-[30px] "></MoveRight>
+          </button>
+        </div>
       </BackgroundGradient>
     </div>
   );

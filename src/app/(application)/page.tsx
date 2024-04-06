@@ -32,7 +32,7 @@ export default async function Home() {
         <Hero images={["/bg-image-2.jpg"]} className="h-screen w-full">
           <div className="text-white z-20 flex flex-col items-center px-8">
             <h1 className="font-bold text-4xl sm:text-5xl text-center md:hidden">
-              Empower Your Experience{" "}
+              Empower Your Experience
               <span className="text-primary">Build Your PC </span> Today
             </h1>
             <Content
@@ -55,10 +55,10 @@ export default async function Home() {
           </div>
         </Hero>
         <div className="max-w-[1440px] w-full flex justify-center items-center">
-          <HomeSectionTwo />
+          <HomeSectionOne />
         </div>
         <div className="max-w-[1440px] w-full flex justify-center items-center">
-          <HomeSectionOne />
+          <HomeSectionTwo />
         </div>
       </div>
     </>

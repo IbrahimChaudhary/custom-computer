@@ -1,37 +1,47 @@
 import mongoose from "mongoose";
 
 const cpuCoolerSchema = new mongoose.Schema({
+  image: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/gamma1199/image/upload/v1712220075/cpu-cooler_ptswlc.webp",
+  },
   name: {
     type: String,
     required: true,
+    default: null,
   },
   price: {
     type: Number,
     required: true,
+    default: null,
   },
   rpm: {
-    type: Number,
+    type: [Number],
     required: true,
+    default: null,
   },
   noise_level: {
-    type: Number,
+    type: [Number],
     required: true,
+    default: null,
   },
   color: {
     type: String,
-    default: "",
+    required: true,
+    default: null,
   },
   size: {
-    type: String,
+    type: Number,
+    required: true,
     default: null,
   },
   created_at: {
     type: Date,
-    default: Date.now,
   },
 });
 
-const CPUCooler =
-  mongoose.models.CPUCooler || mongoose.model("cpucooler", cpuCoolerSchema);
+const CpuCooler =
+  mongoose.models.Cpucooler || mongoose.model("Cpucooler", cpuCoolerSchema);
 
-export default CPUCooler;
+export default CpuCooler;

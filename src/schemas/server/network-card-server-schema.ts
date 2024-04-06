@@ -1,25 +1,36 @@
 import mongoose from "mongoose";
 
 const networkCardSchema = new mongoose.Schema({
+  image: {
+    required: true,
+    type: String,
+    default:
+      "https://res.cloudinary.com/gamma1199/image/upload/v1712268032/network-card_basdqx.webp",
+  },
   name: {
     type: String,
     required: true,
+    default: null,
   },
   price: {
     type: Number,
     required: true,
+    default: null,
   },
   protocol: {
     type: String,
     required: true,
+    default: null,
   },
   interface: {
     type: String,
     required: true,
+    default: null,
   },
   color: {
     type: String,
-    default: "",
+    required: true,
+    default: null,
   },
   created_at: {
     type: Date,
@@ -28,7 +39,7 @@ const networkCardSchema = new mongoose.Schema({
 });
 
 const NetworkCard =
-  mongoose.models.NetworkCard ||
-  mongoose.model("networkcard", networkCardSchema);
+  mongoose.models.Networkcard ||
+  mongoose.model("Networkcard", networkCardSchema);
 
 export default NetworkCard;

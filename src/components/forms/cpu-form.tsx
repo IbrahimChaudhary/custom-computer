@@ -3,15 +3,14 @@ import { Loader } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import PhotosUploader from "../uploader";
-
 import { z } from "zod";
 import React, { useRef, useState } from "react";
-import { caseClientSchema } from "@/schemas/client/case-client-schema";
+import { cpuClientSchema } from "@/schemas/client/cpu-client-schema";
 import { Button } from "@/components/ui/button";
+import { nanoid } from "nanoid";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -19,37 +18,40 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
-import CaseAction from "@/actions/case-action";
+import CpuAction from "@/actions/cpu-action";
 
-export default function CpuForm() {
+export default function CaseForm() {
   const [isFormLoading, setIsFromLoading] = useState(false);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<any>([]);
   const inputItemsRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<any>([]);
-  const handleSelectItem = () => {
-    setImages(inputItemsRef.current?.value);
-    if (inputItemsRef.current) {
+  const handleSelectItem = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (inputItemsRef.current && event.key === "Enter") {
+      event.preventDefault();
+      console.log(inputItemsRef.current.value);
+      const newItem = inputItemsRef.current.value;
+      setItems((prevItems: any) => [...prevItems, newItem]);
       inputItemsRef.current.value = "";
     }
   };
   console.log(items);
-  const form = useForm<z.infer<typeof caseClientSchema>>({
-    resolver: zodResolver(caseClientSchema),
+  const form = useForm<z.infer<typeof cpuClientSchema>>({
+    resolver: zodResolver(cpuClientSchema),
     defaultValues: {
-      color: "",
-      external_volume: NaN,
-      internal_35_bays: NaN,
       name: "",
       price: NaN,
-      psu: "",
-      side_panel: "",
-      type: "",
+      core_count: NaN,
+      core_clock: NaN,
+      boost_clock: NaN,
+      tdp: NaN,
+      graphics: "",
+      smt: false,
     },
   });
-  async function onSubmit(data: z.infer<typeof caseClientSchema>) {
+  async function onSubmit(data: z.infer<typeof cpuClientSchema>) {
     setIsFromLoading(true);
 
-    const res = await CaseAction(data, images[0]);
+    const res = await CpuAction(data, images[0]);
 
     if (res) {
       toast({
@@ -66,6 +68,42 @@ export default function CpuForm() {
 
     setIsFromLoading(false);
   }
+  const handleDeleteItem = (
+    event: React.MouseEvent<HTMLDivElement>,
+    item: any
+  ) => {
+    event.preventDefault();
+    console.log("removing items");
+    setItems((oldValues: any) => {
+      return oldValues.filter((fruit: any) => fruit !== item);
+    });
+  };
+  const handleBoxItems = () => {
+    if (items.length === 0) {
+      return (
+        <>
+          <span>no items added</span>
+        </>
+      );
+    } else {
+      return (
+        <div className="flex gap-3">
+          {items.map((item: any) => {
+            return (
+              <div
+                key={nanoid()}
+                onClick={(e) => handleDeleteItem(e, item)}
+                className="rounded-full group bg-primary cursor-pointer  text-black px-4 flex justify-between items-center gap-2 "
+              >
+                {item}
+                <span className="hidden group-hover:flex">x</span>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+  };
 
   return (
     <Form {...form}>
@@ -73,7 +111,10 @@ export default function CpuForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className=" flex flex-col items-center   pb-4 mt-8"
       >
-        <div className="grid  mb-4 grid-cols-2 gap-x-12 gap-y-6 w-full    ">
+        <div
+          className="grid  mb-4 grid-cols-2 gap-x-12 gap-y-6 w-full 
+           "
+        >
           <FormField
             control={form.control}
             name="name"
@@ -101,101 +142,23 @@ export default function CpuForm() {
               </FormItem>
             )}
           />
-          <FormField
-            control={form.control}
-            name="type"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>type</FormLabel>
-                <FormControl>
-                  <Input placeholder="type : " {...field} />
-                </FormControl>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="color"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>color</FormLabel>
-                <FormControl>
-                  <Input placeholder="color : " {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="psu"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>psu</FormLabel>
-                <FormControl>
-                  <Input placeholder="psu: " {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="side_panel"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>side panel</FormLabel>
-                <FormControl>
-                  <Input placeholder="side panel : " {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="external_volume"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>external volume</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="external volume : "
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="internal_35_bays"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>internal 35 bays</FormLabel>
-                <FormControl>
-                  <Input
-                    type="number"
-                    placeholder="internal 35 bays : "
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          <div className="flex flex-col gap-3">
+            <div>enter Items</div>
+            <Input
+              className="text-white"
+              type="text"
+              placeholder="enter items"
+              ref={inputItemsRef}
+              onKeyDown={handleSelectItem}
+            />
+            {handleBoxItems()}
+          </div>
           <PhotosUploader
             maxPhotos={1}
             addedPhotos={images}
             onChange={setImages}
           />
-          <input type="text" onKeyDown={handleSelectItem} ref={inputItemsRef} />
         </div>
 
         <Button

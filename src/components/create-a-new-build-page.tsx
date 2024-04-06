@@ -3,10 +3,13 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import BuidForm from "./forms/build-form";
 import { Button } from "./ui/moving-border";
 import { Plus } from "lucide-react";
+import { useAdminStore } from "@/stores/admin-store";
 export default function CreateANewBuildPage() {
+  const userSelectedItem = useAdminStore((state) => state.userSelectedCategory);
+
   return (
     <>
-      <div >
+      <div>
         <Dialog>
           <DialogTrigger>
             <Button

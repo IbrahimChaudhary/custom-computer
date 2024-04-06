@@ -16,7 +16,7 @@ export default function UserSelectCategoryWrapper() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger>
-          <Button className="flex justify-center items-center">
+          <Button className="flex justify-center px-4 gap-3 items-center text-white">
             {userSelectedCategory}
             <ChevronDown />
           </Button>

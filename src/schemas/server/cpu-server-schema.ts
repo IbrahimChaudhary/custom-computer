@@ -1,44 +1,53 @@
 import mongoose from "mongoose";
 
 const cpuSchema = new mongoose.Schema({
+  image: {
+    type: String,
+    default:
+      "https://res.cloudinary.com/gamma1199/image/upload/v1712267899/cpu_bqk7g1.webp",
+  },
   name: {
     type: String,
     required: true,
+    default: null,
   },
   price: {
     type: Number,
     required: true,
+    default: null,
   },
   core_count: {
     type: Number,
     required: true,
+    default: null,
   },
   core_clock: {
     type: Number,
     required: true,
+    default: null,
   },
   boost_clock: {
     type: Number,
     required: true,
+    default: null,
   },
   tdp: {
     type: Number,
     required: true,
+    default: null,
   },
   graphics: {
     type: String,
-    default: "",
+    required: true,
+    default: null,
   },
   smt: {
     type: Boolean,
-    default: false,
-  },
-  created_at: {
-    type: Date,
-    default: Date.now,
+    required: true,
+    default: null,
   },
 });
 
-const CPU = mongoose.models.CPU || mongoose.model("cpu", cpuSchema);
+const Cpu = mongoose.models.cpu || mongoose.model("cpu", cpuSchema);
 
-export default CPU;
+export default Cpu;

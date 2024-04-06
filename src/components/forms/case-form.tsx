@@ -1,10 +1,9 @@
 "use client";
-import { Loader } from "lucide-react";
+import { Divide, Loader } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import PhotosUploader from "../uploader";
-
-import { z } from "zod";
+import { map, z } from "zod";
 import React, { useRef, useState } from "react";
 import { caseClientSchema } from "@/schemas/client/case-client-schema";
 import { Button } from "@/components/ui/button";
@@ -20,15 +19,20 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import CaseAction from "@/actions/case-action";
+import { nanoid } from "nanoid";
 
 export default function CaseForm() {
   const [isFormLoading, setIsFromLoading] = useState(false);
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<any>([]);
   const inputItemsRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<any>([]);
-  const handleSelectItem = () => {
-    setImages(inputItemsRef.current?.value);
-    if (inputItemsRef.current) {
+  const handleSelectItem = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (inputItemsRef.current && event.key === "Enter") {
+      event.preventDefault();
+
+      console.log(inputItemsRef.current.value);
+      const newItem = inputItemsRef.current.value;
+      setItems((prevItems: any) => [...prevItems, newItem]);
       inputItemsRef.current.value = "";
     }
   };
@@ -66,6 +70,42 @@ export default function CaseForm() {
 
     setIsFromLoading(false);
   }
+  const handleDeleteItem = (
+    event: React.MouseEvent<HTMLDivElement>,
+    item: any
+  ) => {
+    event.preventDefault();
+    console.log("removing items");
+    setItems((oldValues: any) => {
+      return oldValues.filter((fruit: any) => fruit !== item);
+    });
+  };
+  const handleBoxItems = () => {
+    if (items.length === 0) {
+      return (
+        <>
+          <span>no items added</span>
+        </>
+      );
+    } else {
+      return (
+        <div className="flex gap-3">
+          {items.map((item: any) => {
+            return (
+              <div
+                key={nanoid()}
+                onClick={(e) => handleDeleteItem(e, item)}
+                className="rounded-full group bg-primary cursor-pointer  text-black px-4 flex justify-between items-center gap-2 "
+              >
+                {item}
+                <span className="hidden group-hover:flex">x</span>
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+  };
 
   return (
     <Form {...form}>
@@ -73,7 +113,10 @@ export default function CaseForm() {
         onSubmit={form.handleSubmit(onSubmit)}
         className=" flex flex-col items-center   pb-4 mt-8"
       >
-        <div className="grid  mb-4 grid-cols-2 gap-x-12 gap-y-6 w-full    ">
+        <div
+          className="grid  mb-4 grid-cols-2 gap-x-12 gap-y-6 w-full 
+           "
+        >
           <FormField
             control={form.control}
             name="name"
@@ -190,12 +233,22 @@ export default function CaseForm() {
               </FormItem>
             )}
           />
+          <div className="flex flex-col gap-3">
+            <div>enter Items</div>
+            <Input
+              className="text-white"
+              type="text"
+              placeholder="enter items"
+              ref={inputItemsRef}
+              onKeyDown={handleSelectItem}
+            />
+            {handleBoxItems()}
+          </div>
           <PhotosUploader
             maxPhotos={1}
             addedPhotos={images}
             onChange={setImages}
           />
-          <input type="text" onKeyDown={handleSelectItem} ref={inputItemsRef} />
         </div>
 
         <Button

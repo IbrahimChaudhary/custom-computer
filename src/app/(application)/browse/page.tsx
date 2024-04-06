@@ -1,33 +1,64 @@
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 import giveAllParts from "@/lib/giveAllParts";
-import BrowseCard from "@/components/browse-card";
-import { UserSelectCategory } from "@/components/user-select-category";
 import showAllBuildsOfAUser from "@/lib/showAllBuildsOfAUser";
 import UserSelectCategoryWrapper from "@/components/user-select-category-wrapper";
-import SelectCategory from "@/components/select-category";
-export default async function Browse() {
-  const data = await giveAllParts();
+import BrowseCardWrapper from "@/components/browse-card-wrapper";
+
+export default async function Browse({ searchParams }: { searchParams: any }) {
+  const currentPage = parseInt(searchParams.page) || 1;
+  const data = await giveAllParts(currentPage);
   const allBuilds = await showAllBuildsOfAUser();
   return (
     <>
       <div className="pt-24 w-full px-8 max-w-[1440px] ">
-        <div className="w-full">
+        <div className="w-full flex justify-between mb-8 flex-row-reverse">
           <UserSelectCategoryWrapper />
+          <h1 className="text-6xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text font-semibold">
+            Components
+          </h1>
         </div>
-        <div className="flex gap-x-6 flex-wrap">
-          {data?.map((item) => {
-            return (
-              <BrowseCard
-                partId={item._id.toString()}
-                builds={allBuilds}
-                name={item.name}
-                price={item.price}
-                type="case"
-                key={item._id}
-                image="/some-image.jpg"
+
+        <BrowseCardWrapper
+          data={JSON.parse(JSON.stringify(data))}
+          allbuids={JSON.parse(JSON.stringify(allBuilds))}
+        />
+
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious
+                href={`/browse?page=${currentPage > 1 ? currentPage - 1 : 1}`}
               />
-            );
-          })}
-        </div>
+            </PaginationItem>
+
+            <PaginationItem>
+              <PaginationLink href="/browse?page=1">1</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="/browse?page=2">2</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="/browse?page=3">3</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationLink href="/browse?page=4">4</PaginationLink>
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationEllipsis />
+            </PaginationItem>
+            <PaginationItem>
+              <PaginationNext href={`/browse?page=${currentPage + 1}`} />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
       </div>
     </>
   );
