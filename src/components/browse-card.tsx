@@ -82,7 +82,11 @@ export default function BrowseCard({
                   <Info />
                 </DialogTrigger>
                 <DialogContent>
-                  <MoreInfoDialog></MoreInfoDialog>
+                  <MoreInfoDialog
+                    partId={partId}
+                    withImage={false}
+                    category={category}
+                  ></MoreInfoDialog>
                 </DialogContent>
               </Dialog>
             </CardItem>
