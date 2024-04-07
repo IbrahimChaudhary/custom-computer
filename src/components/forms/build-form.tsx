@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { buildClientSchema } from "@/schemas/client/build-client-schema";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { Loader2 } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -14,44 +16,67 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
+// import { toast } from "@/components/ui/use-toast";
 import BuildAction from "@/actions/build-action";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function BuidForm() {
+  const { toast } = useToast();
+  const [isFormLoading, setIsFromLoading] = useState(false);
   const form = useForm<z.infer<typeof buildClientSchema>>({
     resolver: zodResolver(buildClientSchema),
+    defaultValues: {
+      name: "",
+    },
   });
 
   async function onSubmit(data: z.infer<typeof buildClientSchema>) {
+    setIsFromLoading(true);
     const res = await BuildAction(data);
     if (!res) {
       toast({
+        variant: "destructive",
         title: "something went wrong",
       });
+      setIsFromLoading(false);
+      form.reset();
       return;
     }
     toast({
+      variant: "default",
       title: "build created successfully",
     });
+    setIsFromLoading(false);
+    form.reset();
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="w-full space-y-6 "
+      >
         <FormField
           control={form.control}
           name="name"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel>build name</FormLabel>
+            <FormItem className="w-full">
+              <FormLabel className="text-md pb-10 ">build name</FormLabel>
               <FormControl>
-                <Input placeholder="e.g : my build" {...field} />
+                <Input
+                  className="w-full"
+                  placeholder="e.g : my build"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" className="text-white">
+          {isFormLoading ? null : "create"}
+          {isFormLoading && <Loader2 className="animate-spin" />}
+        </Button>
       </form>
     </Form>
   );

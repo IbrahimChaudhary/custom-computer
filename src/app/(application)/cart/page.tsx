@@ -5,39 +5,48 @@ import Checkout from "@/components/checkout-modal";
 import checkoutModal from "@/components/checkout-modal";
 import { nanoid } from "nanoid";
 import RemoveFromCart from "@/components/remove-from-cart";
+import BuildCard from "@/components/build-card";
+import { IconTemperatureSnow } from "@tabler/icons-react";
+import GradientText from "@/components/gradient-text";
 export default async function Cart() {
   const inCartBuilds = await giveInCartBuilds();
   console.log("$$$$$$$$$$$", inCartBuilds);
   return (
     <>
-      <div className="mt-40">
-        <div>some heading here</div>
+      <div className="mt-32  max-w-[1440px] px-8 flex flex-col w-full justify-start items-start">
+        <GradientText size="text-7xl mb-14">Cart</GradientText>
         <div>
-          {inCartBuilds
-            ? inCartBuilds.map((item) => {
-                return (
-                  <div
-                    key={nanoid()}
-                    className="border p-8 bg-green-600 flex gap-4"
-                  >
-                    <div>{item.builds.name}</div>
-                    <Link href="/browse">
-                      <Button>browse more</Button>
-                    </Link>
-                    <Checkout buildID={item.builds._id.toString()} />
-                    <RemoveFromCart
-                      buildID={item.builds._id.toString()}
-                    ></RemoveFromCart>
-                  </div>
-                );
-              })
-            : null}
-        </div>
-        <div>
-          TODO:there is again a build card there but this time with a button
-          which goes to checkout , browse , remmove from cart buttons
+          <div className="flex justify-start items-start flex-wrap w-full ">
+            {inCartBuilds
+              ? inCartBuilds.map((item) => {
+                  return (
+                    <BuildCard
+                      buildId={item.builds._id.toString()}
+                      name={item.builds.name}
+                      key={nanoid()}
+                      allowGoToCheckout={true}
+                      allowRemoveFromCart={true}
+                    />
+                  );
+                })
+              : null}
+          </div>
         </div>
       </div>
     </>
   );
 }
+
+//  <div
+//                     key={nanoid()}
+//                     className="border p-8 bg-green-600 flex gap-4"
+//                   >
+//                     <div>{item.builds.name}</div>
+//                     <Link href="/browse">
+//                       <Button>browse more</Button>
+//                     </Link>
+//                     <Checkout buildID={item.builds._id.toString()} />
+//                     <RemoveFromCart
+//                       buildID={item.builds._id.toString()}
+//                     ></RemoveFromCart>
+//                   </div>

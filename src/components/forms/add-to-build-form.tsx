@@ -1,9 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
+import { PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -17,6 +18,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import addToBuildAction from "@/actions/add-to-build-action";
+import { useState } from "react";
+import { set } from "mongoose";
 
 const FormSchema = z.object({
   name: z.string().min(2, {
@@ -37,43 +40,41 @@ export function AddToBuildForm({
   partId,
   partType,
 }: AddToBuildFormPropsT) {
+  const [isFormLoading, setIsFromLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
 
   async function handleSubmit() {
-    console.log("I am in the handler functon");
+    setIsFromLoading(true);
+
     const res = await addToBuildAction(partId, partType, buildId);
+    if (!res) {
+      toast({
+        title: "cant add to build, try again",
+      });
+      setIsFromLoading(false);
+      return;
+    }
+    toast({
+      title: "part added to build successfully",
+    });
+    setIsFromLoading(false);
   }
 
   return (
     <>
-      <div className="text-green-500">{buildName}</div>
-      <button onClick={handleSubmit} className="bg-green-500">
-        addd
+      <button
+        disabled={isFormLoading}
+        onClick={handleSubmit}
+        className="flex hover:opacity-85 hover:scale-95 transition-all text-black font-bold bg-mono gap-4 py-2 px-4 rounded-md mb-3"
+      >
+        {isFormLoading ? null : <PlusCircle className="h-6 w-6 stroke-black" />}
+        {isFormLoading ? (
+          <Loader2 className="h-6 w-6 animate-spin stroke-black" />
+        ) : null}
+        {buildName}
       </button>
     </>
-    // <Form {...form}>
-    //   <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
-    //     <FormField
-    //       control={form.control}
-    //       name="name"
-    //       render={({ field }) => (
-    //         <FormItem>
-    //           <div className="text-green-500">{buildName}</div>
-    //           <FormLabel>Username</FormLabel>
-    //           <FormControl>
-    //             <Input placeholder="shadcn" {...field} />
-    //           </FormControl>
-    //           <FormDescription>
-    //             This is your public display name.
-    //           </FormDescription>
-    //           <FormMessage />
-    //         </FormItem>
-    //       )}
-    //     />
-    //     <Button type="submit">Submit</Button>
-    //   </form>
-    // </Form>
   );
 }

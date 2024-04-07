@@ -36,14 +36,20 @@ export default async function NavDD() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuItem>manage account</DropdownMenuItem>
-        <DropdownMenuItem>saved builds</DropdownMenuItem>
+        <DropdownMenuItem className="cursor-pointer">
+          manage account
+        </DropdownMenuItem>
+        {/* <DropdownMenuItem className="cursor-pointer">
+          saved builds
+        </DropdownMenuItem> */}
         <Link href="/cart">
-          <DropdownMenuItem>cart</DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer">cart</DropdownMenuItem>
         </Link>
         <Dialog>
-          <DialogTrigger>
-            <Button>tracking</Button>
+          <DialogTrigger className="w-full flex justify-start items-start">
+            <Button className="bg-transparent pl-2 text-white hover:bg-secondary w-full flex justify-start items-start">
+              tracking
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <Tracking />

@@ -2,6 +2,8 @@
 import { Button } from "./ui/button";
 import { toast } from "@/components/ui/use-toast";
 import putInCartAction from "@/actions/put-in-cart-action";
+import { ShoppingCart } from "lucide-react";
+import { publicDecrypt } from "crypto";
 export default function PutInCart({ buildID }: { buildID: string }) {
   const putInCartHandler = async () => {
     const res = await putInCartAction(buildID);
@@ -17,9 +19,17 @@ export default function PutInCart({ buildID }: { buildID: string }) {
   };
   return (
     <>
-      <div>
-        <Button onClick={putInCartHandler}>put in cart</Button>
+      <div
+        onClick={putInCartHandler}
+        className="w-full border-2 cursor-pointer transition-all flex justify-center items-center text-5xl font-semibold group hover:bg-primary mt-4  py-8"
+      >
+        <span>Add to Cart</span>
+        <ShoppingCart className="h-12 w-12 ml-4 group-hover:animate-bounce" />
       </div>
+
+      {/* <div>
+        <Button onClick={putInCartHandler}>put in cart</Button>
+      </div> */}
     </>
   );
 }

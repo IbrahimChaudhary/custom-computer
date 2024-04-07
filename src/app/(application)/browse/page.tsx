@@ -14,7 +14,6 @@ import BrowseCardWrapper from "@/components/browse-card-wrapper";
 
 export default async function Browse({ searchParams }: { searchParams: any }) {
   const currentPage = parseInt(searchParams.page) || 1;
-  const data = await giveAllParts(currentPage);
   const allBuilds = await showAllBuildsOfAUser();
   return (
     <>
@@ -27,7 +26,7 @@ export default async function Browse({ searchParams }: { searchParams: any }) {
         </div>
 
         <BrowseCardWrapper
-          data={JSON.parse(JSON.stringify(data))}
+          currentPage={currentPage}
           allbuids={JSON.parse(JSON.stringify(allBuilds))}
         />
 

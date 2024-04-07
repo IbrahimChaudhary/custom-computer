@@ -9,19 +9,20 @@ export default async function Nav() {
   return (
     <>
       <div className="flex fixed z-20 w-full    justify-around items-center   py-4 backdrop-blur-[126px] border-b bg-opacity-20 border-b-slate-700  ">
-        <Image
-          alt="custom-computers"
-          src="/logo.png"
-          width={130}
-          height={130}
-          className=""
-        />
+        <Link href="/">
+          <Image
+            src="/logo.png"
+            alt="logo"
+            width={130}
+            height={130}
+            className="cursor-pointer"
+          ></Image>
+        </Link>
         <div className="flex gap-16">
           <Link href="/" className={`${linkClasses}`}>
             home
           </Link>
           <Link href="/forum" className={`${linkClasses}`}>
-            {" "}
             forum
           </Link>
           <Link href="/builds" className={`${linkClasses}`}>

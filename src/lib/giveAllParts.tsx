@@ -1,3 +1,4 @@
+"use server";
 import Motherboard from "@/schemas/server/motherboard-server-schema";
 import PowerSupply from "@/schemas/server/power-supply-server-schema";
 import connectdb from "./connectdb";
@@ -10,86 +11,213 @@ import Fan from "@/schemas/server/fans-server-schema";
 import GraphicsCard from "@/schemas/server/graphics-card-server-schema";
 import Storage from "@/schemas/server/storage-server-schema";
 
-export default async function giveAllParts(page: number = 1) {
+export default async function giveAllParts(page: number = 1, category: string) {
   try {
     console.log("giveAllParts called");
-    const limit = 1;
+    let limit;
+    if (category === "none") {
+      limit = 1;
+    } else {
+      limit = 10;
+    }
     const skip = (page - 1) * limit;
     await connectdb();
-    let cases = await Case.find({}).skip(skip).limit(limit);
-    let cpuCoolers = await CPUCooler.find({}).skip(skip).limit(limit);
-    let networkCards = await NetworkCard.find({}).skip(skip).limit(limit);
-    let motherboards = await Motherboard.find({}).skip(skip).limit(limit);
-    let powerSupplies = await PowerSupply.find({}).skip(skip).limit(limit);
-    let memorys = await Memory.find({}).skip(skip).limit(limit);
-    let cpus = await Cpu.find({}).skip(skip).limit(limit);
-    let fans = await Fan.find({}).skip(skip).limit(limit);
-    let graphicsCards = await GraphicsCard.find({}).skip(skip).limit(limit);
-    let storages = await Storage.find({}).skip(skip).limit(limit);
 
-    // Add 'type' property to each document
-    cases = cases.map((doc) => ({ ...doc.toObject(), category: "case" }));
+    if (category !== "none") {
+      let parts;
+      switch (category) {
+        case "case":
+          parts = await Case.find({}).skip(skip).limit(limit);
+          break;
+        case "cpu-cooler":
+          parts = await CPUCooler.find({}).skip(skip).limit(limit);
+          break;
+        case "network-card":
+          parts = await NetworkCard.find({}).skip(skip).limit(limit);
+          break;
+        case "motherboard":
+          parts = await Motherboard.find({}).skip(skip).limit(limit);
+          break;
+        case "power-supply":
+          parts = await PowerSupply.find({}).skip(skip).limit(limit);
+          break;
+        case "memory":
+          parts = await Memory.find({}).skip(skip).limit(limit);
+          break;
+        case "Cpu":
+          parts = await Cpu.find({}).skip(skip).limit(limit);
+          break;
+        case "fans":
+          parts = await Fan.find({}).skip(skip).limit(limit);
+          break;
+        case "graphics-card":
+          parts = await GraphicsCard.find({}).skip(skip).limit(limit);
+          break;
+        case "storage":
+          parts = await Storage.find({}).skip(skip).limit(limit);
+          break;
 
-    cpuCoolers = cpuCoolers.map((doc) => ({
-      ...doc.toObject(),
-      category: "cpu-cooler",
-    }));
+        default:
+          parts = [];
+      }
 
-    networkCards = networkCards.map((doc) => ({
-      ...doc.toObject(),
-      category: "network-card",
-    }));
+      parts = parts.map((doc) => ({ ...doc.toObject(), category }));
 
-    powerSupplies = powerSupplies.map((doc) => ({
-      ...doc.toObject(),
-      category: "power-supply",
-    }));
-    motherboards = motherboards.map((doc) => ({
-      ...doc.toObject(),
-      category: "motherboard",
-    }));
-    memorys = memorys.map((doc) => ({
-      ...doc.toObject(),
-      category: "memory",
-    }));
-    cpus = cpus.map((doc) => ({
-      ...doc.toObject(),
-      category: "Cpu",
-    }));
-    fans = fans.map((doc) => ({
-      ...doc.toObject(),
-      category: "fans",
-    }));
-    graphicsCards = graphicsCards.map((doc) => ({
-      ...doc.toObject(),
-      category: "graphics-card",
-    }));
-    storages = storages.map((doc) => ({
-      ...doc.toObject(),
-      category: "storage",
-    }));
+      return parts;
+    } else {
+      let cases = await Case.find({}).skip(skip).limit(limit);
+      let cpuCoolers = await CPUCooler.find({}).skip(skip).limit(limit);
+      let networkCards = await NetworkCard.find({}).skip(skip).limit(limit);
+      let motherboards = await Motherboard.find({}).skip(skip).limit(limit);
+      let powerSupplies = await PowerSupply.find({}).skip(skip).limit(limit);
+      let memorys = await Memory.find({}).skip(skip).limit(limit);
+      let cpus = await Cpu.find({}).skip(skip).limit(limit);
+      let fans = await Fan.find({}).skip(skip).limit(limit);
+      let graphicsCards = await GraphicsCard.find({}).skip(skip).limit(limit);
+      let storages = await Storage.find({}).skip(skip).limit(limit);
 
-    let res = [
-      ...cases,
-      ...cpuCoolers,
-      ...networkCards,
-      ...powerSupplies,
-      ...motherboards,
-      ...memorys,
-      ...cpus,
-      ...fans,
-      ...graphicsCards,
-      ...storages,
-    ];
+      cases = cases.map((doc) => ({ ...doc.toObject(), category: "case" }));
+      cpuCoolers = cpuCoolers.map((doc) => ({
+        ...doc.toObject(),
+        category: "cpu-cooler",
+      }));
+      networkCards = networkCards.map((doc) => ({
+        ...doc.toObject(),
+        category: "network-card",
+      }));
+      powerSupplies = powerSupplies.map((doc) => ({
+        ...doc.toObject(),
+        category: "power-supply",
+      }));
+      motherboards = motherboards.map((doc) => ({
+        ...doc.toObject(),
+        category: "motherboard",
+      }));
+      memorys = memorys.map((doc) => ({
+        ...doc.toObject(),
+        category: "memory",
+      }));
+      cpus = cpus.map((doc) => ({
+        ...doc.toObject(),
+        category: "Cpu",
+      }));
+      fans = fans.map((doc) => ({
+        ...doc.toObject(),
+        category: "fans",
+      }));
+      graphicsCards = graphicsCards.map((doc) => ({
+        ...doc.toObject(),
+        category: "graphics-card",
+      }));
+      storages = storages.map((doc) => ({
+        ...doc.toObject(),
+        category: "storage",
+      }));
 
-    // Fisher-Yates (Knuth) shuffle algorithm
-    for (let i = res.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [res[i], res[j]] = [res[j], res[i]];
+      let res = [
+        ...cases,
+        ...cpuCoolers,
+        ...networkCards,
+        ...powerSupplies,
+        ...motherboards,
+        ...memorys,
+        ...cpus,
+        ...fans,
+        ...graphicsCards,
+        ...storages,
+      ];
+
+      for (let i = res.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [res[i], res[j]] = [res[j], res[i]];
+      }
+
+      return res;
     }
-
-    return res;
   } catch (error) {
     console.log("error in finding parts", error);
   }
 }
+
+// export default async function giveAllParts(page: number = 1) {
+//   try {
+//     console.log("giveAllParts called");
+//     const limit = 1;
+//     const skip = (page - 1) * limit;
+//     await connectdb();
+//     let cases = await Case.find({}).skip(skip).limit(limit);
+//     let cpuCoolers = await CPUCooler.find({}).skip(skip).limit(limit);
+//     let networkCards = await NetworkCard.find({}).skip(skip).limit(limit);
+//     let motherboards = await Motherboard.find({}).skip(skip).limit(limit);
+//     let powerSupplies = await PowerSupply.find({}).skip(skip).limit(limit);
+//     let memorys = await Memory.find({}).skip(skip).limit(limit);
+//     let cpus = await Cpu.find({}).skip(skip).limit(limit);
+//     let fans = await Fan.find({}).skip(skip).limit(limit);
+//     let graphicsCards = await GraphicsCard.find({}).skip(skip).limit(limit);
+//     let storages = await Storage.find({}).skip(skip).limit(limit);
+
+//     cases = cases.map((doc) => ({ ...doc.toObject(), category: "case" }));
+
+//     cpuCoolers = cpuCoolers.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "cpu-cooler",
+//     }));
+
+//     networkCards = networkCards.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "network-card",
+//     }));
+
+//     powerSupplies = powerSupplies.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "power-supply",
+//     }));
+//     motherboards = motherboards.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "motherboard",
+//     }));
+//     memorys = memorys.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "memory",
+//     }));
+//     cpus = cpus.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "Cpu",
+//     }));
+//     fans = fans.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "fans",
+//     }));
+//     graphicsCards = graphicsCards.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "graphics-card",
+//     }));
+//     storages = storages.map((doc) => ({
+//       ...doc.toObject(),
+//       category: "storage",
+//     }));
+
+//     let res = [
+//       ...cases,
+//       ...cpuCoolers,
+//       ...networkCards,
+//       ...powerSupplies,
+//       ...motherboards,
+//       ...memorys,
+//       ...cpus,
+//       ...fans,
+//       ...graphicsCards,
+//       ...storages,
+//     ];
+
+//     // Fisher-Yates (Knuth) shuffle algorithm
+//     for (let i = res.length - 1; i > 0; i--) {
+//       const j = Math.floor(Math.random() * (i + 1));
+//       [res[i], res[j]] = [res[j], res[i]];
+//     }
+
+//     return res;
+//   } catch (error) {
+//     console.log("error in finding parts", error);
+//   }
+// }

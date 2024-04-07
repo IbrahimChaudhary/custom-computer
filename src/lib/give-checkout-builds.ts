@@ -24,7 +24,7 @@ export default async function giveCheckoutBuilds() {
       },
     ]);
     if (!res) {
-      return false;
+      return [];
     }
     return res;
   } catch (error) {

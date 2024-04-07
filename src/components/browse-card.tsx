@@ -1,22 +1,28 @@
 "use client";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "./ui/button";
-import { PlusCircle } from "lucide-react";
+import { Loader2, PlusCircle, Trash2 } from "lucide-react";
 import AddToBuildDialog from "./add-to-build-dialog";
 import MoreInfoDialog from "./more-info-dialog";
+import deletePartFromBuild from "@/actions/delete-part-from-build";
 import { Info } from "lucide-react";
 import { buildT } from "@/types/build-type";
 import getDefaultImage from "@/lib/give-default-image";
 import Image from "next/image";
 import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
-import Link from "next/link";
+import GradientText from "./gradient-text";
+import { useToast } from "./ui/use-toast";
+import { useState } from "react";
 type buildCardPropsT = {
   image?: string;
   partId: string;
   price: number;
   name: string;
   category: string;
-  builds: buildT[];
+  builds?: buildT[];
+  allowAddToBuild?: boolean;
+  allowRemoveFromBuild?: boolean;
+  buildId?: string;
 };
 export default function BrowseCard({
   image,
@@ -25,7 +31,30 @@ export default function BrowseCard({
   category,
   builds,
   partId,
+  allowAddToBuild,
+  allowRemoveFromBuild,
+  buildId,
 }: buildCardPropsT) {
+  const { toast } = useToast();
+  const [isRemovingFromBuild, setIsRemovingFromBuild] = useState(false);
+
+  const handlePartDeletionFromBuild = async () => {
+    if (!buildId) return;
+    setIsRemovingFromBuild(true);
+    const res = await deletePartFromBuild(partId, buildId);
+    if (!res) {
+      toast({
+        title: "Error while deleting part from build",
+      });
+      setIsRemovingFromBuild(false);
+      return;
+    }
+    toast({
+      title: "Part deleted from build",
+    });
+    setIsRemovingFromBuild(false);
+    return;
+  };
   return (
     <>
       <CardContainer className="inter-var pt-0  " containerClassName=" ">
@@ -90,30 +119,52 @@ export default function BrowseCard({
                 </DialogContent>
               </Dialog>
             </CardItem>
-            <CardItem
-              translateZ={20}
-              as="button"
-              className=" py-2 w-full rounded-xl bg-black flex dark:bg-white dark:text-black text-white text-xs font-bold"
-            >
-              <Dialog>
-                <DialogTrigger className="w-full rounded-lg">
-                  <Button
-                    variant="secondary"
-                    className="w-full rounded-lg flex gap-3 flex-row-reverse"
-                  >
-                    add to build
-                    <PlusCircle className="ml-2" size="20" />
-                  </Button>
-                </DialogTrigger>
-                <DialogContent>
-                  <AddToBuildDialog
-                    partId={partId}
-                    partType={category}
-                    builds={builds}
-                  ></AddToBuildDialog>
-                </DialogContent>
-              </Dialog>
-            </CardItem>
+
+            {allowAddToBuild ? (
+              <CardItem
+                translateZ={20}
+                as="button"
+                className=" py-2 w-full rounded-xl bg-black flex dark:bg-white dark:text-black text-white text-xs font-bold"
+              >
+                <Dialog>
+                  <DialogTrigger className="w-full rounded-lg">
+                    <Button
+                      variant="secondary"
+                      className="w-full rounded-lg flex gap-3 flex-row-reverse"
+                    >
+                      add to build
+                      <PlusCircle className="ml-2" size="20" />
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <div className="w-full flex justify-center my-3">
+                      <GradientText size="text-3xl">Your Builds</GradientText>
+                    </div>
+                    <AddToBuildDialog
+                      partId={partId}
+                      partType={category}
+                      builds={builds}
+                    ></AddToBuildDialog>
+                  </DialogContent>
+                </Dialog>
+              </CardItem>
+            ) : null}
+
+            {allowRemoveFromBuild ? (
+              <Button
+                disabled={isRemovingFromBuild}
+                variant="secondary"
+                onClick={handlePartDeletionFromBuild}
+                className="text-white hover:opacity-80 hover:scale-95 transition-all flex justify-center place-items-center gap-3 w-full"
+              >
+                {isRemovingFromBuild ? (
+                  <Loader2 className="animate-spin h-6 w-6 stroke-white" />
+                ) : (
+                  <Trash2 className="stroke-white " />
+                )}
+                remove
+              </Button>
+            ) : null}
           </div>
         </CardBody>
       </CardContainer>

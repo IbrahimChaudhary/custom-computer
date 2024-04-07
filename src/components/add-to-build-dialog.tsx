@@ -5,7 +5,7 @@ import { buildT } from "@/types/build-type";
 import { nanoid } from "nanoid";
 import { AddToBuildForm } from "./forms/add-to-build-form";
 type AddToBuildDialogPropsT = {
-  builds: buildT[];
+  builds?: buildT[];
   partType: string;
   partId: string;
 };
@@ -15,11 +15,10 @@ export default function AddToBuildDialog({
   partId,
   partType,
 }: AddToBuildDialogPropsT) {
-  console.log("in the add to build modal : ", builds);
   return (
     <>
       <div>
-        <div>
+        <div className="flex  gap-3 flex-wrap ">
           {builds?.map((build) => {
             return (
               <AddToBuildForm
@@ -32,9 +31,12 @@ export default function AddToBuildDialog({
             );
           })}
         </div>
+        <hr />
         <Dialog>
-          <DialogTrigger>
-            <Button>create a new build</Button>
+          <DialogTrigger className="w-full">
+            <Button className="mt-8 w-full text-white hover:opacity-85 hover:scale-95 transition-all">
+              create a new build
+            </Button>
           </DialogTrigger>
           <DialogContent>
             <BuidForm></BuidForm>
