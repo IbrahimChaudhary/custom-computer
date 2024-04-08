@@ -11,12 +11,13 @@ import giveAllParts from "@/lib/giveAllParts";
 import showAllBuildsOfAUser from "@/lib/showAllBuildsOfAUser";
 import UserSelectCategoryWrapper from "@/components/user-select-category-wrapper";
 import BrowseCardWrapper from "@/components/browse-card-wrapper";
-
+import { AdminVerification } from "@/components/admin-verification";
 export default async function Parts({ searchParams }: { searchParams: any }) {
   const currentPage = parseInt(searchParams.page) || 1;
   const allBuilds = await showAllBuildsOfAUser();
   return (
     <>
+      <AdminVerification />
       <div className="pt-6 w-full px-8 max-w-[1440px] ">
         <div className="w-full flex justify-between mb-8 flex-row-reverse">
           <UserSelectCategoryWrapper />

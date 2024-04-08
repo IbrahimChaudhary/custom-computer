@@ -11,54 +11,11 @@ import {
 import giveAllPartsInAbuild from "@/lib/give-all-parts-in-a-build";
 import giveCheckoutBuilds from "@/lib/give-checkout-builds";
 import total from "@/lib/total";
-import { buildT } from "@/types/build-type";
-
-const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-];
+import { revalidatePath } from "next/cache";
+import giveStatusColor from "@/lib/give-status-color";
 
 export default async function Tracking() {
+  revalidatePath("/", "layout");
   const data = await giveCheckoutBuilds();
   const handleSummation = async (buildID: string) => {
     const parts = await giveAllPartsInAbuild(buildID);
@@ -79,11 +36,14 @@ export default async function Tracking() {
       </TableHeader>
       <TableBody>
         {data?.map((item: any) => (
-          <TableRow key={item.builds.name}>
-            <TableCell className="font-medium">{item.builds.name}</TableCell>
-            <TableCell>{item.builds.status}</TableCell>
-            <TableCell className="text-right">
-              {handleSummation(item.builds._id.toString())}
+          <TableRow key={item.buildID}>
+            <TableCell className="font-medium">{item.buildName}</TableCell>
+            <TableCell className={`${giveStatusColor(item.status)}`}>
+              {item.status}
+            </TableCell>
+            <TableCell className="text-right text-green-500">
+              {/* {handleSummation(item.builds._id.toString())} */}
+              {item.bill}$
             </TableCell>
           </TableRow>
         ))}

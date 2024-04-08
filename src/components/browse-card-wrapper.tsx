@@ -48,7 +48,9 @@ export default function BrowseCardWrapper({
                 category={item.category}
                 key={item._id}
                 image={item.image}
-                allowAddToBuild={true}
+                allowAddToBuild={false}
+                allowRemoveFromBuild={false}
+                allowDelete={true}
               />
             );
           })

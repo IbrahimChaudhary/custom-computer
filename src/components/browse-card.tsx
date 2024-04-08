@@ -13,6 +13,7 @@ import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import GradientText from "./gradient-text";
 import { useToast } from "./ui/use-toast";
 import { useState } from "react";
+import deleteComponent from "@/actions/delete-component";
 type buildCardPropsT = {
   image?: string;
   partId: string;
@@ -23,6 +24,7 @@ type buildCardPropsT = {
   allowAddToBuild?: boolean;
   allowRemoveFromBuild?: boolean;
   buildId?: string;
+  allowDelete?: boolean;
 };
 export default function BrowseCard({
   image,
@@ -34,9 +36,27 @@ export default function BrowseCard({
   allowAddToBuild,
   allowRemoveFromBuild,
   buildId,
+  allowDelete,
 }: buildCardPropsT) {
   const { toast } = useToast();
   const [isRemovingFromBuild, setIsRemovingFromBuild] = useState(false);
+  const [isDeletingComponent, setIsDeletingComponent] = useState(false);
+
+  const handleComponentDeletion = async () => {
+    setIsDeletingComponent(true);
+    const res = await deleteComponent(partId, category);
+    if (!res) {
+      toast({
+        title: "Error while deleting component",
+      });
+      setIsDeletingComponent(false);
+      return;
+    }
+    toast({
+      title: "Component deleted , pls  refresh!",
+    });
+    setIsDeletingComponent(false);
+  };
 
   const handlePartDeletionFromBuild = async () => {
     if (!buildId) return;
@@ -163,6 +183,22 @@ export default function BrowseCard({
                   <Trash2 className="stroke-white " />
                 )}
                 remove
+              </Button>
+            ) : null}
+
+            {allowDelete ? (
+              <Button
+                disabled={isDeletingComponent}
+                variant="secondary"
+                onClick={handleComponentDeletion}
+                className="text-white hover:opacity-80 hover:scale-95 transition-all flex justify-center place-items-center gap-3 w-full"
+              >
+                {isDeletingComponent ? (
+                  <Loader2 className="animate-spin h-6 w-6 stroke-white" />
+                ) : (
+                  <Trash2 className="stroke-white " />
+                )}
+                delete
               </Button>
             ) : null}
           </div>

@@ -4,7 +4,7 @@ export default function Sidebar() {
     <>
       <div className="w-[20vw] border-r h-screen ">
         <div className="h-[10%] bg-[#7ED348] text-black text-2xl font-bold flex pl-6 items-center">
-          Admin_Name
+          Aaron
         </div>
         <div className="flex flex-col gap-4 text-xl pl-2 pt-8  items-start font-semibold text-[#7ED348]">
           <Link

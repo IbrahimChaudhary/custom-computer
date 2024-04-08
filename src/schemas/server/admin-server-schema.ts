@@ -4,7 +4,16 @@ const adminSchema = new Schema({
   name: String,
   orders: [
     {
-      customerEmail: String,
+      mail: String,
+      buildName: String,
+      bill: Number,
+      parts: [
+        {
+          partId: String,
+          partType: String,
+        },
+      ],
+      status: String,
       buildID: String,
     },
   ],
