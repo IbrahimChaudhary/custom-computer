@@ -12,7 +12,6 @@ import AddSpecialBuildBtnWrapper from "@/components/add-special-build-btn";
 
 export default async function SpecialBuild({ params }: { params: any }) {
   await connectdb();
-  console.log(params.specialBuildID, "params----------");
 
   const res = await SpecialBuilds.findOne({
     _id: params.specialBuildID,
