@@ -4,6 +4,7 @@ import Nav from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/toaster";
+import type { Metadata } from "next";
 import NextTopLoaderProvider from "@/providers/next-top-loader-provider";
 import "@mantine/core/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
