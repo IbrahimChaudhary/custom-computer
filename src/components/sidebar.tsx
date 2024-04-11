@@ -51,15 +51,6 @@ export default function Sidebar() {
               all parts
               <Computer></Computer>
             </Link>
-            <Link
-              className={`hover:bg-[#7ED348] ${
-                isActive("/dashboard/orders") ? "bg-mono text-black" : null
-              } transition-all ease-linear justify-end items-center hover:text-black w-full rounded-lg py-2 pl-6  flex flex-row-reverse gap-4 `}
-              href="/dashboard/orders"
-            >
-              orders
-              <BarChartBig></BarChartBig>
-            </Link>
           </div>
           <Link
             className={`hover:bg-[#7ED348] my-8 w-[90%] mx-2 font-bold   transition-all ease-linear justify-end items-center hover:text-black  rounded-lg py-2 pl-6  flex flex-row-reverse gap-4 `}
