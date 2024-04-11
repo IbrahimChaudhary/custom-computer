@@ -13,5 +13,5 @@ export const motherboardFormSchema = z.object({
   }),
   max_memory: z.coerce.number(),
   memory_slots: z.coerce.number(),
-  color: z.string().nullable().default(""),
+  color: z.string(),
 });

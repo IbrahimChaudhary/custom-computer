@@ -11,6 +11,6 @@ export const graphicsCardFormSchema = z.object({
   memory: z.coerce.number(),
   core_clock: z.coerce.number(),
   boost_clock: z.coerce.number(),
-  color: z.string().nullable().default(""),
+  color: z.string(),
   length: z.coerce.number(),
 });

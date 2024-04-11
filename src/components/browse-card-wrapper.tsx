@@ -25,6 +25,9 @@ export default function BrowseCardWrapper({
   useEffect(() => {
     const fetchData = async () => {
       const partsData = await giveAllParts(currentPage, userSelectedItem);
+      console.log("----------------------------------------");
+      console.log(partsData);
+      console.log("----------------------------------------");
 
       if (partsData) {
         setData(partsData);
@@ -54,8 +57,7 @@ export default function BrowseCardWrapper({
                 key={item._id}
                 image={item.image}
                 allowAddToBuild={allowAddToBuild}
-                allowDelete={allowDelete}  
-                
+                allowDelete={allowDelete}
               />
             );
           })

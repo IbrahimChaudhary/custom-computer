@@ -40,7 +40,7 @@ export default async function Dashboard() {
     <>
       <AdminVerification />
       <div className="bg-slate-950 w-full px-8 pt-3">
-        <GradientText size="text-6xl">Stats</GradientText>
+        <GradientText size="text-6xl">Orders</GradientText>
 
         <div className="w-full flex-col flex justify-center items-center mt-16 gap-8 ">
           <div className="flex gap-6 w-full justify-center items-center ">

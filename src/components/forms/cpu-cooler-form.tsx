@@ -11,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,7 +19,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import CPUCoolerAction from "@/actions/cpu-cooler-action";
-import { keys } from "@mantine/core";
 import { nanoid } from "nanoid";
 
 export default function CpuCoolerForm() {
@@ -45,7 +43,12 @@ export default function CpuCoolerForm() {
   async function onSubmit(data: z.infer<typeof cpuCoolerFormSchema>) {
     setIsFromLoading(true);
 
-    const res = await CPUCoolerAction(data, images[0] , noiseLevelItems, rpmItems);
+    const res = await CPUCoolerAction(
+      data,
+      images[0],
+      noiseLevelItems,
+      rpmItems
+    );
 
     if (res) {
       toast({

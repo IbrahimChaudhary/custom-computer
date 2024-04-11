@@ -7,7 +7,7 @@ import { z } from "zod";
 import React, { useRef, useState } from "react";
 import { cpuClientSchema } from "@/schemas/client/cpu-client-schema";
 import { Button } from "@/components/ui/button";
-import { nanoid } from "nanoid";
+
 import {
   Form,
   FormControl,
@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import CpuAction from "@/actions/cpu-action";
 
-export default function CaseForm() {
+export default function CpuForm() {
   const [isFormLoading, setIsFromLoading] = useState(false);
   const [items, setItems] = useState<any>([]);
   const inputItemsRef = useRef<HTMLInputElement>(null);
@@ -45,7 +45,7 @@ export default function CaseForm() {
       boost_clock: NaN,
       tdp: NaN,
       graphics: "",
-      smt: false,
+      smt: "",
     },
   });
   async function onSubmit(data: z.infer<typeof cpuClientSchema>) {
@@ -55,7 +55,7 @@ export default function CaseForm() {
 
     if (res) {
       toast({
-        title: "case successfully inserted",
+        title: "cpu successfully inserted",
       });
       setIsFromLoading(false);
       form.reset();
@@ -68,42 +68,6 @@ export default function CaseForm() {
 
     setIsFromLoading(false);
   }
-  const handleDeleteItem = (
-    event: React.MouseEvent<HTMLDivElement>,
-    item: any
-  ) => {
-    event.preventDefault();
-    console.log("removing items");
-    setItems((oldValues: any) => {
-      return oldValues.filter((fruit: any) => fruit !== item);
-    });
-  };
-  const handleBoxItems = () => {
-    if (items.length === 0) {
-      return (
-        <>
-          <span>no items added</span>
-        </>
-      );
-    } else {
-      return (
-        <div className="flex gap-3">
-          {items.map((item: any) => {
-            return (
-              <div
-                key={nanoid()}
-                onClick={(e) => handleDeleteItem(e, item)}
-                className="rounded-full group bg-primary cursor-pointer  text-black px-4 flex justify-between items-center gap-2 "
-              >
-                {item}
-                <span className="hidden group-hover:flex">x</span>
-              </div>
-            );
-          })}
-        </div>
-      );
-    }
-  };
 
   return (
     <Form {...form}>
@@ -143,17 +107,88 @@ export default function CaseForm() {
             )}
           />
 
-          <div className="flex flex-col gap-3">
-            <div>enter Items</div>
-            <Input
-              className="text-white"
-              type="text"
-              placeholder="enter items"
-              ref={inputItemsRef}
-              onKeyDown={handleSelectItem}
-            />
-            {handleBoxItems()}
-          </div>
+          <FormField
+            control={form.control}
+            name="core_count"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>core count</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="core_clock"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>core clock</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="boost_clock"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>boost clock</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="tdp"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>tdp</FormLabel>
+                <FormControl>
+                  <Input type="number" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="graphics"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>core count</FormLabel>
+                <FormControl>
+                  <Input type="text" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="smt"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>smt</FormLabel>
+                <FormControl>
+                  <Input type="text" {...field} placeholder="true or false" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
           <PhotosUploader
             maxPhotos={1}
             addedPhotos={images}

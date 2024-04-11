@@ -12,5 +12,5 @@ export const cpuClientSchema = z.object({
   graphics: z.string().min(2, {
     message: "Graphics must be at least 2 characters long.",
   }),
-  smt: z.boolean(),
+  smt: z.string().min(2, { message: "SMT must be at least 2 characters long." }),
 });

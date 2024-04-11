@@ -10,6 +10,7 @@ import Cpu from "@/schemas/server/cpu-server-schema";
 import Fan from "@/schemas/server/fans-server-schema";
 import GraphicsCard from "@/schemas/server/graphics-card-server-schema";
 import Storage from "@/schemas/server/storage-server-schema";
+import { reverse } from "dns";
 
 export default async function giveAllParts(page: number = 1, category: string) {
   try {
@@ -27,34 +28,56 @@ export default async function giveAllParts(page: number = 1, category: string) {
       let parts;
       switch (category) {
         case "case":
-          parts = await Case.find({}).skip(skip).limit(limit);
+          parts = await Case.find({}).sort({ _id: -1 }).skip(skip).limit(limit);
+
           break;
         case "cpu-cooler":
-          parts = await CPUCooler.find({}).skip(skip).limit(limit);
+          parts = await CPUCooler.find({})
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(limit);
           break;
         case "network-card":
-          parts = await NetworkCard.find({}).skip(skip).limit(limit);
+          parts = await NetworkCard.find({})
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(limit);
           break;
         case "motherboard":
-          parts = await Motherboard.find({}).skip(skip).limit(limit);
+          parts = await Motherboard.find({})
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(limit);
           break;
         case "power-supply":
-          parts = await PowerSupply.find({}).skip(skip).limit(limit);
+          parts = await PowerSupply.find({})
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(limit);
           break;
         case "memory":
-          parts = await Memory.find({}).skip(skip).limit(limit);
+          parts = await Memory.find({})
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(limit);
           break;
         case "Cpu":
-          parts = await Cpu.find({}).skip(skip).limit(limit);
+          parts = await Cpu.find({}).sort({ _id: -1 }).skip(skip).limit(limit);
           break;
         case "fans":
-          parts = await Fan.find({}).skip(skip).limit(limit);
+          parts = await Fan.find({}).sort({ _id: -1 }).skip(skip).limit(limit);
           break;
         case "graphics-card":
-          parts = await GraphicsCard.find({}).skip(skip).limit(limit);
+          parts = await GraphicsCard.find({})
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(limit);
           break;
         case "storage":
-          parts = await Storage.find({}).skip(skip).limit(limit);
+          parts = await Storage.find({})
+            .sort({ _id: -1 })
+            .skip(skip)
+            .limit(limit);
           break;
 
         default:
@@ -65,16 +88,37 @@ export default async function giveAllParts(page: number = 1, category: string) {
 
       return parts;
     } else {
-      let cases = await Case.find({}).skip(skip).limit(limit);
-      let cpuCoolers = await CPUCooler.find({}).skip(skip).limit(limit);
-      let networkCards = await NetworkCard.find({}).skip(skip).limit(limit);
-      let motherboards = await Motherboard.find({}).skip(skip).limit(limit);
-      let powerSupplies = await PowerSupply.find({}).skip(skip).limit(limit);
-      let memorys = await Memory.find({}).skip(skip).limit(limit);
-      let cpus = await Cpu.find({}).skip(skip).limit(limit);
-      let fans = await Fan.find({}).skip(skip).limit(limit);
-      let graphicsCards = await GraphicsCard.find({}).skip(skip).limit(limit);
-      let storages = await Storage.find({}).skip(skip).limit(limit);
+      let cases = await Case.find({}).sort({ _id: -1 }).skip(skip).limit(limit);
+      let cpuCoolers = await CPUCooler.find({})
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit);
+      let networkCards = await NetworkCard.find({})
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit);
+      let motherboards = await Motherboard.find({})
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit);
+      let powerSupplies = await PowerSupply.find({})
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit);
+      let memorys = await Memory.find({})
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit);
+      let cpus = await Cpu.find({}).sort({ _id: -1 }).skip(skip).limit(limit);
+      let fans = await Fan.find({}).sort({ _id: -1 }).skip(skip).limit(limit);
+      let graphicsCards = await GraphicsCard.find({})
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit);
+      let storages = await Storage.find({})
+        .sort({ _id: -1 })
+        .skip(skip)
+        .limit(limit);
 
       cases = cases.map((doc) => ({ ...doc.toObject(), category: "case" }));
       cpuCoolers = cpuCoolers.map((doc) => ({
@@ -115,16 +159,16 @@ export default async function giveAllParts(page: number = 1, category: string) {
       }));
 
       let res = [
-        ...cases,
-        ...cpuCoolers,
-        ...networkCards,
-        ...powerSupplies,
-        ...motherboards,
-        ...memorys,
-        ...cpus,
-        ...fans,
-        ...graphicsCards,
-        ...storages,
+        ...cases.reverse(),
+        ...cpuCoolers.reverse(),
+        ...networkCards.reverse(),
+        ...powerSupplies.reverse(),
+        ...motherboards.reverse(),
+        ...memorys.reverse(),
+        ...cpus.reverse(),
+        ...fans.reverse(),
+        ...graphicsCards.reverse(),
+        ...storages.reverse(),
       ];
 
       for (let i = res.length - 1; i > 0; i--) {

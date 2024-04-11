@@ -233,7 +233,7 @@ export default function CaseForm() {
               </FormItem>
             )}
           />
-          <div className="flex flex-col gap-3">
+          {/* <div className="flex flex-col gap-3">
             <div>enter Items</div>
             <Input
               className="text-white"
@@ -243,7 +243,7 @@ export default function CaseForm() {
               onKeyDown={handleSelectItem}
             />
             {handleBoxItems()}
-          </div>
+          </div> */}
           <PhotosUploader
             maxPhotos={1}
             addedPhotos={images}

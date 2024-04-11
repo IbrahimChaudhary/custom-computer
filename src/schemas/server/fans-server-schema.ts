@@ -27,7 +27,7 @@ const fanSchema = new mongoose.Schema({
     default: null,
   },
   rpm: {
-    type: Number,
+    type: [Number],
     required: true,
     default: null,
   },
@@ -42,7 +42,7 @@ const fanSchema = new mongoose.Schema({
     default: null,
   },
   pwm: {
-    type: Boolean,
+    type: String,
     required: true,
     default: null,
   },

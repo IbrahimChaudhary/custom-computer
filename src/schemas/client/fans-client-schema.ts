@@ -6,9 +6,9 @@ export const fanFormSchema = z.object({
   }),
   price: z.coerce.number(),
   size: z.coerce.number(),
-  color: z.string().nullable().default(""),
-  rpm: z.array(z.coerce.number()),
-  airflow: z.number().nullable().default(null),
-  noise_level: z.number().nullable().default(null),
-  pwm: z.boolean(),
+  color: z.string(),
+
+  airflow: z.coerce.number(),
+  noise_level: z.coerce.number(),
+  pwm: z.string(),
 });

@@ -33,7 +33,7 @@ const powerSupplySchema = new mongoose.Schema({
     default: null,
   },
   modular: {
-    type: Boolean,
+    type: String,
     required: true,
     default: null,
   },
