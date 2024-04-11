@@ -3,12 +3,22 @@ import NavDD from "./dropdowns/nav-dd";
 import { SignInButton } from "@clerk/nextjs";
 import { currentUser } from "@clerk/nextjs";
 import Image from "next/image";
-export default async function Nav() {
+import { cn } from "@/lib/utils";
+export default async function Nav({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) {
   const user = await currentUser();
   const linkClasses = "hover:text-mono transition-colors";
   return (
     <>
-      <div className="flex fixed z-20 w-full    justify-around items-center   py-4 backdrop-blur-[126px] border-b bg-opacity-20 border-b-slate-700  ">
+      <div
+        className={cn(
+          "flex fixed z-20 w-full    justify-around items-center   py-4 backdrop-blur-[126px] border-b bg-opacity-20 border-b-slate-700  ",
+          className
+        )}
+        {...props}
+      >
         <Link href="/">
           <Image
             src="/logo.png"
