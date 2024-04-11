@@ -16,6 +16,9 @@ import AdminDeleteOrder from "@/components/admin-delete-order";
 import AdminChangeStatusDD from "@/components/admin-change-status-dd";
 
 import Link from "next/link";
+export const metadata = {
+  title: "dashboard",
+};
 
 export default async function Dashboard() {
   const data = await getOrders();

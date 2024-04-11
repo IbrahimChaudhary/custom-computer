@@ -4,6 +4,9 @@ import { nanoid } from "nanoid";
 import Link from "next/link";
 import BuildCard from "@/components/build-card";
 import CreateANewBuildPage from "@/components/create-a-new-build-page";
+export const metadata = {
+  title: "builds",
+};
 export default async function Build() {
   const allBuilds = await showAllBuildsOfAUser();
   return (

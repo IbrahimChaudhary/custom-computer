@@ -2,6 +2,9 @@ import AddPartsPage from "@/components/add-parts-page";
 import { AdminSelectCategory } from "@/components/admin-select-category";
 import { Button } from "@/components/ui/button";
 import { AdminVerification } from "@/components/admin-verification";
+export const metadata = {
+  title: "dashboard",
+};
 export default function AddParts() {
   return (
     <>

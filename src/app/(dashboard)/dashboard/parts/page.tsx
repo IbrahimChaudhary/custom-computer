@@ -12,6 +12,9 @@ import showAllBuildsOfAUser from "@/lib/showAllBuildsOfAUser";
 import UserSelectCategoryWrapper from "@/components/user-select-category-wrapper";
 import BrowseCardWrapper from "@/components/browse-card-wrapper";
 import { AdminVerification } from "@/components/admin-verification";
+export const metadata = {
+  title: " dashboard",
+};
 export default async function Parts({ searchParams }: { searchParams: any }) {
   const currentPage = parseInt(searchParams.page) || 1;
   const allBuilds = await showAllBuildsOfAUser();

@@ -8,9 +8,12 @@ import RemoveFromCart from "@/components/remove-from-cart";
 import BuildCard from "@/components/build-card";
 import { IconTemperatureSnow } from "@tabler/icons-react";
 import GradientText from "@/components/gradient-text";
+export const metadata = {
+  title: "cart",
+};
 export default async function Cart() {
   const inCartBuilds = await giveInCartBuilds();
-  console.log("$$$$$$$$$$$", inCartBuilds);
+
   return (
     <>
       <div className="mt-32  max-w-[1440px] px-8 flex flex-col w-full justify-start items-start">

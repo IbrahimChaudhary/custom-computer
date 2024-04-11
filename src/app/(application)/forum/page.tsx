@@ -13,6 +13,9 @@ import SwitchForumTabBtn from "@/components/switch-forum-tab-btn";
 import QuestionWrapper from "@/components/wrappers/questions-wrapper";
 import ShareBuildsWrapper from "@/components/wrappers/share-builds-wrapper";
 import { nanoid } from "nanoid";
+export const metadata = {
+  title: "forum",
+};
 export default async function Forum() {
   await connectdb();
   const user = await currentUser();

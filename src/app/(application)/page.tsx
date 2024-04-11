@@ -7,6 +7,9 @@ import { MoveRight } from "lucide-react";
 import HomeSectionOne from "@/components/home-section-one";
 import HomeSectionTwo from "@/components/home-section-two";
 import { Button } from "@/components/ui/moving-border";
+export const metadata = {
+  title: "Home",
+};
 
 const words = [
   {

@@ -11,7 +11,9 @@ import giveAllParts from "@/lib/giveAllParts";
 import showAllBuildsOfAUser from "@/lib/showAllBuildsOfAUser";
 import UserSelectCategoryWrapper from "@/components/user-select-category-wrapper";
 import BrowseCardWrapper from "@/components/browse-card-wrapper";
-
+export const metadata = {
+  title: "browse",
+};
 export default async function Browse({ searchParams }: { searchParams: any }) {
   const currentPage = parseInt(searchParams.page) || 1;
   const allBuilds = await showAllBuildsOfAUser();
