@@ -1,79 +1,105 @@
-"use client";
-
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button as SpecialButton } from "@/components/ui/moving-border";
-import { Share2 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { toast } from "@/components/ui/use-toast";
-const FormSchema = z.object({
-  filter: z.string().min(2, {
-    message: "Username must be at least 2 characters.",
-  }),
-});
-export default function Forum() {
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
+import QuestionInput from "@/components/question-input";
+import QuestionDisplayCard from "@/components/question-display-card";
+import ReplyCard from "@/components/reply-card";
+import connectdb from "@/lib/connectdb";
+import Questions from "@/schemas/server/questions-server-schema";
+import BuildInput from "@/components/build-input";
+import ShareBuilds from "@/schemas/server/share-build-server-schema";
+import User from "@/schemas/server/user-server-schema";
+import { currentUser } from "@clerk/nextjs";
+import BuildDisplayCard from "@/components/build-display-card";
+import GradientText from "@/components/gradient-text";
+import SwitchForumTabBtn from "@/components/switch-forum-tab-btn";
+import QuestionWrapper from "@/components/wrappers/questions-wrapper";
+import ShareBuildsWrapper from "@/components/wrappers/share-builds-wrapper";
+import { nanoid } from "nanoid";
+export default async function Forum() {
+  await connectdb();
+  const user = await currentUser();
+  const questionsData = await Questions.find({});
+  const sharedBuilds = await ShareBuilds.find({});
+  const userInfo = await User.find({
+    userEmail: user?.emailAddresses[0].emailAddress,
   });
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
-  }
-  return (
-    <>
-      <div className="w-full max-w-[1440px] pt-20 px-8">
-        <div className=" w-full flex flex-row-reverse justify-between items-end mt-8">
-          <SpecialButton
-            className="py-3 px-6 flex gap-2 "
-            borderRadius="0.5rem"
-          >
-            share build
-            <Share2 />
-          </SpecialButton>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(onSubmit)}
-              className="w-2/3 space-y-6"
-            >
-              <FormField
-                control={form.control}
-                name="filter"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        className="text-white"
-                        placeholder="ask question"
-                        {...field}
-                      />
-                    </FormControl>
 
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              {/* <Button type="submit">Submit</Button> */}
-            </form>
-          </Form>
-        </div>
+  return (
+    <div className="w-full py-24 px-8 max-w-[1440px]">
+      <GradientText size="text-5xl">Forum</GradientText>
+      <div className="flex justify-center w-full items-end py-12 mb-6  ">
+        <QuestionInput />
+        <BuildInput userInfo={JSON.parse(JSON.stringify(userInfo))} />
       </div>
-    </>
+      <SwitchForumTabBtn />
+      <ShareBuildsWrapper>
+        <div className="w-full   flex flex-col gap-6 mt-4">
+          {sharedBuilds
+            ?.slice()
+            .reverse()
+            .map((build: any) => {
+              return (
+                <BuildDisplayCard
+                  key={build._id.toString()}
+                  name={build.name}
+                  parts={build.parts}
+                  sharedBuildID={build._id.toString()}
+                  buildName={build.buildName}
+                  email={build.email}
+                  image={build.image}
+                  buildID={build.buildID.toString()}
+                >
+                  <div className="flex flex-col w-full  justify-end items-end">
+                    {build?.reactions?.map((reaction: any) => {
+                      return (
+                        <ReplyCard
+                          key={nanoid()}
+                          name={reaction.name}
+                          reaction={reaction.reaction}
+                          image={reaction.image}
+                          email={reaction.email}
+                          replyID={reaction._id}
+                        />
+                      );
+                    })}
+                  </div>
+                </BuildDisplayCard>
+              );
+            })}
+        </div>
+      </ShareBuildsWrapper>
+      <QuestionWrapper>
+        <div className="w-full   flex flex-col gap-6 mt-4">
+          {questionsData
+            ?.slice()
+            .reverse()
+            .map((question) => {
+              return (
+                <QuestionDisplayCard
+                  key={question._id.toString()}
+                  name={question.name}
+                  question={question.question}
+                  image={question.image}
+                  email={question.email}
+                  questionID={question._id.toString()}
+                >
+                  <div className="flex flex-col w-full  justify-end items-end">
+                    {question.answers.map((answer: any) => {
+                      return (
+                        <ReplyCard
+                          key={nanoid()}
+                          name={answer.name}
+                          answer={answer.answer}
+                          image={answer.image}
+                          email={answer.email}
+                          replyID={answer._id}
+                        />
+                      );
+                    })}
+                  </div>
+                </QuestionDisplayCard>
+              );
+            })}
+        </div>
+      </QuestionWrapper>
+    </div>
   );
 }

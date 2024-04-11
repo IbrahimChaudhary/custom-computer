@@ -16,7 +16,7 @@ export default async function Cart() {
       <div className="mt-32  max-w-[1440px] px-8 flex flex-col w-full justify-start items-start">
         <GradientText size="text-7xl mb-14">Cart</GradientText>
         <div>
-          <div className="flex justify-start items-start flex-wrap w-full ">
+          <div className="flex justify-start items-start flex-wrap w-full gap-12 ">
             {inCartBuilds
               ? inCartBuilds.map((item) => {
                   return (

@@ -20,7 +20,13 @@ import { Input } from "@/components/ui/input";
 import BuildAction from "@/actions/build-action";
 import { useToast } from "@/components/ui/use-toast";
 
-export default function BuidForm() {
+export default function BuidForm({
+  isWithPayload = false,
+  payload,
+}: {
+  isWithPayload?: boolean;
+  payload?: any;
+}) {
   const { toast } = useToast();
   const [isFormLoading, setIsFromLoading] = useState(false);
   const form = useForm<z.infer<typeof buildClientSchema>>({
@@ -31,23 +37,43 @@ export default function BuidForm() {
   });
 
   async function onSubmit(data: z.infer<typeof buildClientSchema>) {
-    setIsFromLoading(true);
-    const res = await BuildAction(data);
-    if (!res) {
+    if (isWithPayload) {
+      setIsFromLoading(true);
+      const res = await BuildAction(data, isWithPayload, payload);
+      if (!res) {
+        toast({
+          variant: "destructive",
+          title: "something went wrong",
+        });
+        setIsFromLoading(false);
+        form.reset();
+        return;
+      }
       toast({
-        variant: "destructive",
-        title: "something went wrong",
+        variant: "default",
+        title: "build created successfully",
       });
       setIsFromLoading(false);
       form.reset();
-      return;
+    } else {
+      setIsFromLoading(true);
+      const res = await BuildAction(data);
+      if (!res) {
+        toast({
+          variant: "destructive",
+          title: "something went wrong",
+        });
+        setIsFromLoading(false);
+        form.reset();
+        return;
+      }
+      toast({
+        variant: "default",
+        title: "build created successfully",
+      });
+      setIsFromLoading(false);
+      form.reset();
     }
-    toast({
-      variant: "default",
-      title: "build created successfully",
-    });
-    setIsFromLoading(false);
-    form.reset();
   }
 
   return (

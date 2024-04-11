@@ -106,16 +106,6 @@ export default function BrowseCard({
             </CardItem>
           </div>
           <CardItem translateZ="100" className="w-full   ">
-            {/* <CardItem className="inline-block absolute bottom-1 right-2">
-              <Dialog>
-                <DialogTrigger>
-                  <Info />
-                </DialogTrigger>
-                <DialogContent>
-                  <MoreInfoDialog></MoreInfoDialog>
-                </DialogContent>
-              </Dialog>
-            </CardItem> */}
             <Image
               src={getDefaultImage(category)}
               height="300"

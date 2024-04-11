@@ -11,6 +11,7 @@ import Memory from "@/schemas/server/memory-server-schema";
 import Fans from "@/schemas/server/fans-server-schema";
 import GraphicsCard from "@/schemas/server/graphics-card-server-schema";
 import Storage from "@/schemas/server/storage-server-schema";
+import mongoose from "mongoose";
 export default async function giveComponent(partID: string, category: string) {
   try {
     console.log(partID, "partID");

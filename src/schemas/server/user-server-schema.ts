@@ -2,6 +2,8 @@ import mongoose, { Schema } from "mongoose";
 
 const userSchema = new Schema({
   userEmail: String,
+  image: String,
+  name: String,
   builds: [
     {
       name: String,

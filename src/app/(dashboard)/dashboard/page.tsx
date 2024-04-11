@@ -5,19 +5,19 @@ import GradientText from "@/components/gradient-text";
 export default async function Dashboard() {
   const data = await getOrders();
 
-  const shippedOrdersCount = data.filter(
+  const shippedOrdersCount = data?.filter(
     (order: any) => order.status === "shipped"
   ).length;
 
-  const checkedOrdersCount = data.filter(
+  const checkedOrdersCount = data?.filter(
     (order: any) => order.status === "checkout"
   ).length;
 
-  const approvedOrdersCount = data.filter(
+  const approvedOrdersCount = data?.filter(
     (order: any) => order.status === "approved"
   ).length;
 
-  const rejectedOrdersCount = data.filter(
+  const rejectedOrdersCount = data?.filter(
     (order: any) => order.status === "rejected"
   ).length;
 
@@ -25,29 +25,29 @@ export default async function Dashboard() {
     <>
       <div className="bg-slate-950 w-full px-8 pt-3">
         <GradientText size="text-6xl">Stats</GradientText>
-        {/* <AdminVerification /> */}
+        <AdminVerification />
 
         <div className="w-full flex justify-center items-center mt-16">
           <div className="flex gap-6 ">
             <StatCard
               look="bg-yellow-400"
               title="shipped"
-              value={shippedOrdersCount.toString()}
+              value={shippedOrdersCount?.toString()}
             />
             <StatCard
               title="Checked out"
               look="bg-blue-800"
-              value={checkedOrdersCount.toString()}
+              value={checkedOrdersCount?.toString()}
             />
             <StatCard
               look="bg-lime-500"
               title="Approved"
-              value={approvedOrdersCount.toString()}
+              value={approvedOrdersCount?.toString()}
             />
             <StatCard
               look="bg-red-700"
               title="Rejected"
-              value={rejectedOrdersCount.toString()}
+              value={rejectedOrdersCount?.toString()}
             />
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { RedirectToUserProfile } from "@clerk/nextjs";
 import { Hero } from "@/components/hero";
 import Link from "next/link";
 import Content from "@/components/content";
@@ -45,13 +46,15 @@ export default async function Home() {
               imagination with BuildPC, the gateway to personalized computing
               excellence
             </p>
-            <Button
-              borderRadius="0.8rem"
-              className="   text-white  py-4 px-8 flex gap-2"
-            >
-              start building
-              <MoveRight></MoveRight>
-            </Button>
+            <Link href="/builds">
+              <Button
+                borderRadius="0.8rem"
+                className="   text-white  py-4 px-8 flex gap-2"
+              >
+                start building
+                <MoveRight></MoveRight>
+              </Button>
+            </Link>
           </div>
         </Hero>
         <div className="max-w-[1440px] w-full flex justify-center items-center">

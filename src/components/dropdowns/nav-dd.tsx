@@ -5,8 +5,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import Tracking from "../tracking";
-
+import { RedirectToUserProfile } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
+import { UserProfile } from "@clerk/nextjs";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,6 +20,9 @@ import {
 
 export default async function NavDD() {
   const user = await currentUser();
+
+  console.log(user, "user");
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="bg-transparent text-white" asChild>
@@ -31,14 +37,16 @@ export default async function NavDD() {
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <span>{user?.username}</span>
+          <span>{user?.firstName}</span>
           <ChevronDown></ChevronDown>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuItem className="cursor-pointer">
-          manage account
-        </DropdownMenuItem>
+        <Link href={"/user-profile"}>
+          <DropdownMenuItem className="cursor-pointer">
+            manage account
+          </DropdownMenuItem>
+        </Link>
         {/* <DropdownMenuItem className="cursor-pointer">
           saved builds
         </DropdownMenuItem> */}

@@ -15,6 +15,8 @@ export default async function createUser() {
     console.log("USER NOT EXIST : CHECKED WHILE CREATING NEW BUILD");
     const res = await User.create({
       userEmail: email,
+      image: user?.imageUrl,
+      name: user?.firstName,
       builds: [],
     });
     if (!res) {

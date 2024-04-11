@@ -5,15 +5,18 @@ import { IconAppWindow } from "@tabler/icons-react";
 import Image from "next/image";
 import GradientText from "./gradient-text";
 import { MoveRight } from "lucide-react";
+import Link from "next/link";
+import { UrlObject } from "url";
 
 type PopularBuildsCardPropsT = {
   status: string;
   name: string;
   description: string;
   price: number;
-  buildLink: string;
-  children: React.ReactNode;
+  buildLink?: string;
+
   imageLink: string;
+  children: React.ReactNode;
 };
 
 export function PopularBuildsCard({
@@ -46,10 +49,12 @@ export function PopularBuildsCard({
 
           <div className="w-[80%] flex flex-col gap-4 mt-4">{children}</div>
 
-          <button className="bg-blue-600 font-bold hover:opacity-80 transition-all hover:scale-105  gap-3 flex justify-center items-center mt-12 py-2">
-            view build
-            <MoveRight className="w-[30px] h-[30px] "></MoveRight>
-          </button>
+          {/* <a href={buildLink}>
+            <button className="bg-blue-600 font-bold hover:opacity-80 transition-all hover:scale-105  gap-3 flex justify-center items-center mt-12 py-2">
+              view build
+              <MoveRight className="w-[30px] h-[30px] "></MoveRight>
+            </button>
+          </a> */}
         </div>
       </BackgroundGradient>
     </div>

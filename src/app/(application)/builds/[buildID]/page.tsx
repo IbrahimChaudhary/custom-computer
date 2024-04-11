@@ -14,7 +14,14 @@ import { Delete, Edit, ShoppingCart } from "lucide-react";
 import EditBuildButton from "@/components/edit-build-button";
 import DeleteBuildButton from "@/components/delete-build-button";
 import Link from "next/link";
-export default async function SingleBuild({ params }: { params: any }) {
+export default async function SingleBuild({
+  params,
+  searchParams,
+}: {
+  params: any;
+  searchParams: any;
+}) {
+  const viewOnly = searchParams["view-only"] === "true";
   await connectdb();
   const user = await currentUser();
   const build = await User.aggregate([
@@ -57,6 +64,7 @@ export default async function SingleBuild({ params }: { params: any }) {
       );
     }
   };
+
   return (
     <>
       <div className="pt-24 w-full max-w-[1440px] px-8 flex flex-col ">
@@ -67,11 +75,13 @@ export default async function SingleBuild({ params }: { params: any }) {
           <div className="flex justify-center items-center gap-4">
             {/* <EditBuildButton />
             <DeleteBuildButton buildId={params.buildID} /> */}
-            <Link href={"/browse"}>
-              <Button className="text-white hover:opacity-80 hover:scale-95 transition-all">
-                Add Components
-              </Button>
-            </Link>
+            {!viewOnly ? (
+              <Link href={"/browse"}>
+                <Button className="text-white hover:opacity-80 hover:scale-95 transition-all">
+                  Add Components
+                </Button>
+              </Link>
+            ) : null}
           </div>
         </div>
 
@@ -87,7 +97,7 @@ export default async function SingleBuild({ params }: { params: any }) {
                     price={part.price}
                     image={part.image}
                     allowAddToBuild={false}
-                    allowRemoveFromBuild={true}
+                    allowRemoveFromBuild={!viewOnly}
                     buildId={params.buildID}
                   ></BrowseCard>
                 );
@@ -102,7 +112,7 @@ export default async function SingleBuild({ params }: { params: any }) {
           </div>
         </div>
 
-        {buildAction()}
+        {!viewOnly ? buildAction() : null}
       </div>
     </>
   );

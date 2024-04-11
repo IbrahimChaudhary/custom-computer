@@ -5,14 +5,19 @@ import { useAdminStore } from "@/stores/admin-store";
 import React from "react";
 import giveAllParts from "@/lib/giveAllParts";
 import { useEffect, useState } from "react";
+import { all } from "axios";
 
 type BrowseCardWrapperProps = {
   currentPage: number;
   allbuids: buildT[];
+  allowAddToBuild?: boolean;
+  allowDelete?: boolean;
 };
 export default function BrowseCardWrapper({
   currentPage,
   allbuids,
+  allowAddToBuild,
+  allowDelete,
 }: BrowseCardWrapperProps) {
   const [data, setData] = useState<any>([]);
   const userSelectedItem = useAdminStore((state) => state.userSelectedCategory);
@@ -48,9 +53,9 @@ export default function BrowseCardWrapper({
                 category={item.category}
                 key={item._id}
                 image={item.image}
-                allowAddToBuild={false}
-                allowRemoveFromBuild={false}
-                allowDelete={true}
+                allowAddToBuild={allowAddToBuild}
+                allowDelete={allowDelete}  
+                
               />
             );
           })

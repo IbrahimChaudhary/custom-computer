@@ -5,6 +5,7 @@ export type AdminStoreT = {
   userSelectedCategory: CategoriesT["categories"];
   adminSelectedCategoryForFilter: CategoriesT["categories"];
   adminPassword: string;
+  activeForumTab: "questions" | "builds";
 
   setAdminSelectedCategory: (
     selectedCategory: CategoriesT["categories"]
@@ -16,8 +17,10 @@ export type AdminStoreT = {
     selectedCategory: CategoriesT["categories"]
   ) => void;
   setAdminPassword: (password: string) => void;
+  setActiveForumTab: (tab: "questions" | "builds") => void;
 };
 export const useAdminStore = create<AdminStoreT>((set) => ({
+  activeForumTab: "questions",
   adminPassword: "none",
   adminSelectedCategory: "none",
   adminSelectedCategoryForFilter: "none",
@@ -33,4 +36,5 @@ export const useAdminStore = create<AdminStoreT>((set) => ({
 
   setAdminSelectedCategory: (selectedCategory) =>
     set(() => ({ adminSelectedCategory: selectedCategory })),
+  setActiveForumTab: (tab) => set(() => ({ activeForumTab: tab })),
 }));

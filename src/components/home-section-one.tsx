@@ -1,22 +1,31 @@
 import { PopularBuildsCard } from "./popular-builds-card";
-import { LampContainer } from "./ui/lamp";
 import SpecRange from "./spec-range";
 import { Database } from "lucide-react";
 import { Cpu } from "lucide-react";
 import { Aperture } from "lucide-react";
 import { MemoryStick } from "lucide-react";
-export default function HomeSectionOne() {
+import { MoveRight } from "lucide-react";
+import Link from "next/link";
+import PopulateSpecialBuilds from "@/actions/populate-special-builds";
+import SpecialBuilds from "@/schemas/server/special-builds-schema";
+import connectdb from "@/lib/connectdb";
+import { Button } from "./ui/button";
+export default async function HomeSectionOne() {
+  await PopulateSpecialBuilds();
+  await connectdb();
+  const specialBuilds = await SpecialBuilds.find({});
+  console.log(specialBuilds, "454454545454");
+  console.log(specialBuilds[0]._id.toString(), "!!!!!!!!!!!!!!!!!");
   return (
     <>
       <div className=" flex flex-col  py-24 w-full  justify-center items-center bg-slate-950 ">
         <div className="text-6xl mb-16 font-semibold ">Popular Builds</div>
         <div className="flex flex-col gap-28 w-full justify-center items-center">
           <PopularBuildsCard
-            buildLink="/"
             description="evel up your gaming experience without breaking the bank!"
             imageLink="https://res.cloudinary.com/gamma1199/image/upload/v1712392689/good-build_vejzff.webp"
             name="RTX 4060"
-            price={1280}
+            price={522.84}
             status="GOOD"
           >
             <SpecRange color="bg-red-500" range={70} title="Processor">
@@ -31,16 +40,24 @@ export default function HomeSectionOne() {
             <SpecRange color="bg-yellow-500" range={40} title="Storage">
               <Database className="stroke-black"></Database>
             </SpecRange>
+            <Link
+              href={`/${specialBuilds[0]._id.toString()}`}
+              className="w-full"
+            >
+              <Button className="bg-blue-600 w-full font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 flex justify-center items-center mt-12 py-2">
+                view build
+                <MoveRight className="w-[30px] h-[30px] "></MoveRight>
+              </Button>
+            </Link>
           </PopularBuildsCard>
 
           <PopularBuildsCard
-            buildLink="/"
             description="evel up your gaming experience without breaking the bank!"
             imageLink="https://res.cloudinary.com/gamma1199/image/upload/v1712392705/better-build_ju98fg.webp"
             name="RTX 4070 SUPER
 
 "
-            price={1799}
+            price={509.98}
             status="BETTER"
           >
             <SpecRange color="bg-red-500" range={90} title="Processor">
@@ -55,14 +72,21 @@ export default function HomeSectionOne() {
             <SpecRange color="bg-yellow-500" range={70} title="Storage">
               <Database className="stroke-black"></Database>
             </SpecRange>
+            <Link
+              href={`/${specialBuilds[1]._id.toString()}`}
+              className="w-full"
+            >
+              <Button className="bg-blue-600 font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 w-full flex justify-center items-center mt-12 py-2">
+                view build
+                <MoveRight className="w-[30px] h-[30px] "></MoveRight>
+              </Button>
+            </Link>
           </PopularBuildsCard>
-
           <PopularBuildsCard
-            buildLink="/"
             description="evel up your gaming experience without breaking the bank!"
             imageLink="https://res.cloudinary.com/gamma1199/image/upload/v1712392599/ultimate-build_szqkqd.webp"
             name="RTX 4080 SUPER"
-            price={2399}
+            price={757.14}
             status="ULTIMATE"
           >
             <SpecRange color="bg-red-500" range={80} title="Processor">
@@ -77,6 +101,15 @@ export default function HomeSectionOne() {
             <SpecRange color="bg-yellow-500" range={95} title="Storage">
               <Database className="stroke-black"></Database>
             </SpecRange>
+            <Link
+              href={`/${specialBuilds[2]._id.toString()}`}
+              className="w-full"
+            >
+              <Button className="bg-blue-600 w-full font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 flex justify-center items-center mt-12 py-2">
+                view build
+                <MoveRight className="w-[30px] h-[30px] "></MoveRight>
+              </Button>
+            </Link>
           </PopularBuildsCard>
         </div>
       </div>

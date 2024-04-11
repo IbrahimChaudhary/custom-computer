@@ -25,6 +25,10 @@ export default function MoreInfoDialog({
 
     fetchData();
   }, [partId]);
+  console.log("-----------------------------------");
+  console.log(partId, "partId");
+  console.log(category, "category#############");
+  console.log("-----------------------------------");
 
   return (
     <>

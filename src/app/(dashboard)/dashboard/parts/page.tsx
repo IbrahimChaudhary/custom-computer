@@ -29,6 +29,8 @@ export default async function Parts({ searchParams }: { searchParams: any }) {
         <BrowseCardWrapper
           currentPage={currentPage}
           allbuids={JSON.parse(JSON.stringify(allBuilds))}
+          allowAddToBuild={false}
+          allowDelete={true}
         />
 
         <Pagination className="mb-24">

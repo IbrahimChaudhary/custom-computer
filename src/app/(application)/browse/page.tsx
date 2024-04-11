@@ -28,6 +28,8 @@ export default async function Browse({ searchParams }: { searchParams: any }) {
         <BrowseCardWrapper
           currentPage={currentPage}
           allbuids={JSON.parse(JSON.stringify(allBuilds))}
+          allowAddToBuild={true}
+          allowDelete={false}
         />
 
         <Pagination>

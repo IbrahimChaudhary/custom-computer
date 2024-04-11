@@ -3,6 +3,7 @@ import Image from "next/image";
 import GradientText from "./gradient-text";
 import { PersonStanding } from "lucide-react";
 import { Button } from "./ui/moving-border";
+import Link from "next/link";
 export default function HomeSectionTwo() {
   return (
     <>
@@ -11,10 +12,12 @@ export default function HomeSectionTwo() {
           <GradientText size="text-7xl leading-[1.25]">
             Ask Questions Or Share Builds on our Forum
           </GradientText>
-          <button className="w-[50%] bg-mono rounded-md flex justify-center items-center font-semibold py-2 text-lg gap-2 hover:opacity-90 hover:scale-110 transition-all ">
-            Go to Forum
-            <PersonStanding className="w-8 h-8" />
-          </button>
+          <Link href="/forum">
+            <button className="w-[50%] bg-mono rounded-md flex justify-center items-center font-semibold py-2 text-lg gap-2 hover:opacity-90 hover:scale-95 transition-all ">
+              Go to Forum
+              <PersonStanding className="w-8 h-8" />
+            </button>
+          </Link>
         </div>
         <Image
           src="https://res.cloudinary.com/gamma1199/image/upload/v1712402205/forum_ysedaq.webp"
