@@ -14,12 +14,11 @@ export default async function HomeSectionOne() {
   await PopulateSpecialBuilds();
   await connectdb();
   const specialBuilds = await SpecialBuilds.find({});
-  console.log(specialBuilds, "454454545454");
-  console.log(specialBuilds[0]._id.toString(), "!!!!!!!!!!!!!!!!!");
+
   return (
     <>
       <div className=" flex flex-col  py-24 w-full  justify-center items-center bg-slate-950 ">
-        <div className="text-6xl mb-16 font-semibold ">Popular Builds</div>
+        {/* <div className="text-6xl mb-16 font-semibold ">Popular Builds</div> */}
         <div className="flex flex-col gap-28 w-full justify-center items-center">
           <PopularBuildsCard
             description="evel up your gaming experience without breaking the bank!"
@@ -40,11 +39,14 @@ export default async function HomeSectionOne() {
             <SpecRange color="bg-yellow-500" range={40} title="Storage">
               <Database className="stroke-black"></Database>
             </SpecRange>
+            <div className="text-mono text-3xl   w-full mb-8 mt-2 flex justify-center sm:hidden">
+              <span className="border-b-2 border-mono">522.84$</span>
+            </div>
             <Link
-              href={`/${specialBuilds[0]._id.toString()}`}
-              className="w-full"
+              href={`/special-builds/${specialBuilds[0]._id.toString()}`}
+              className="w-full flex"
             >
-              <Button className="bg-blue-600 w-full font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 flex justify-center items-center mt-12 py-2">
+              <Button className="bg-blue-600 w-full mt-12 font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 flex justify-center items-center  py-2">
                 view build
                 <MoveRight className="w-[30px] h-[30px] "></MoveRight>
               </Button>
@@ -72,11 +74,14 @@ export default async function HomeSectionOne() {
             <SpecRange color="bg-yellow-500" range={70} title="Storage">
               <Database className="stroke-black"></Database>
             </SpecRange>
+            <div className="text-mono text-3xl   w-full mb-8 mt-2 flex justify-center sm:hidden">
+              <span className="border-b-2 border-mono">522.84$</span>
+            </div>
             <Link
-              href={`/${specialBuilds[1]._id.toString()}`}
-              className="w-full"
+              href={`/special-builds/${specialBuilds[1]._id.toString()}`}
+              className="w-full flex"
             >
-              <Button className="bg-blue-600 font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 w-full flex justify-center items-center mt-12 py-2">
+              <Button className="bg-blue-600 mt-12 font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 w-full flex justify-center items-center  py-2">
                 view build
                 <MoveRight className="w-[30px] h-[30px] "></MoveRight>
               </Button>
@@ -101,11 +106,15 @@ export default async function HomeSectionOne() {
             <SpecRange color="bg-yellow-500" range={95} title="Storage">
               <Database className="stroke-black"></Database>
             </SpecRange>
+
+            <div className="text-mono text-3xl   w-full mb-8 mt-2 flex justify-center sm:hidden">
+              <span className="border-b-2 border-mono">522.84$</span>
+            </div>
             <Link
-              href={`/${specialBuilds[2]._id.toString()}`}
-              className="w-full"
+              href={`/special-builds/${specialBuilds[2]._id.toString()}`}
+              className="w-full flex "
             >
-              <Button className="bg-blue-600 w-full font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 flex justify-center items-center mt-12 py-2">
+              <Button className="bg-blue-600 mt-12 w-full font-bold hover:opacity-80 transition-all hover:scale-95  gap-3 flex justify-center items-center  py-2">
                 view build
                 <MoveRight className="w-[30px] h-[30px] "></MoveRight>
               </Button>

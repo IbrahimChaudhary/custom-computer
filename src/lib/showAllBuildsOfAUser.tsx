@@ -1,14 +1,14 @@
 import connectdb from "./connectdb";
-import { auth } from "@clerk/nextjs";
+import { currentUser } from "@clerk/nextjs";
 import User from "@/schemas/server/user-server-schema";
 export default async function showAllBuildsOfAUser() {
   try {
     await connectdb();
     console.log("showAllBuildsOfAUser called");
-    const user = auth();
-    console.log("testing user Email : ", user?.sessionClaims?.email);
+    const user = await currentUser();
+    console.log("testing user Email : ", user?.emailAddresses[0].emailAddress);
     const res = await User.findOne(
-      { userEmail: user.sessionClaims?.email },
+      { userEmail: user?.emailAddresses[0].emailAddress },
       { builds: 1, _id: 0 }
     );
     if (!res) {

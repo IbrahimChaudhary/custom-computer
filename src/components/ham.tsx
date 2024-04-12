@@ -19,11 +19,11 @@ export default function Ham({
   console.log(body);
   const handleClosingHam = () => {
     setOpen(!open);
-    body.style.overflow = "visible";
+    document.body.style.overflowY = "visible";
   };
   const handleOpeningHam = () => {
     setOpen(!open);
-    body.style.overflow = "hidden";
+    document.body.style.overflowY = "hidden";
   };
   return (
     <>
@@ -47,7 +47,7 @@ export default function Ham({
           )}
         </div>
         {open && (
-          <div className="h-[92vh] gap-6 w-full bg-slate-950 flex-col p-6 flex overflow-y-auto">
+          <div className="h-[92vh] gap-6 w-full bg-slate-950 flex-col p-6 flex overflow-hidden">
             {hamLinks.map((hamLink: any) => {
               return (
                 <a

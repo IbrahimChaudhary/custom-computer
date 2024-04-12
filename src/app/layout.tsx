@@ -53,7 +53,7 @@ export default async function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${inter.className} outline-none bg-slate-950 text-white flex justify-center w-full relative`}
+        className={`${inter.className} outline-none bg-slate-950 text-white flex justify-center w-full relative overflow-x-hidden`}
       >
         <div className="w-full">
           <NextTopLoaderProvider>

@@ -33,21 +33,27 @@ export function PopularBuildsCard({
       <BackgroundGradient className="  rounded-[22px]  p-4 sm:p-10 bg-zinc-900 flex gap-48 items-center ">
         <Image
           src={imageLink}
-          alt="jordans"
+          alt="specialBuilds"
           height="30"
           width="400"
-          className="object-contain"
+          className="object-contain rounded-lg xl:flex hidden"
         />
-        <div className="flex flex-col w-full  ">
-          <div className="flex justify-between mb-8 flex-row-reverse items-center">
-            <div className="  border-mono border-b-2 text-mono text-3xl font-medium">
+        <div className="flex flex-col w-full justify-center items-center  md:items-start  ">
+          <div className="flex xl:items-center items-end justify-center flex-wrap-reverse sm:justify-between xl:justify-end 2xl:justify-between  mb-8 flex-row-reverse xl:gap-12   w-full ">
+            <div className="  border-mono border-b-2 text-mono text-3xl font-medium hidden sm:flex">
               {price}$
             </div>
-            <p className="text-6xl font-bold italic ">{status}</p>
+            <p className="md:text-6xl font-bold italic tsm:text-5xl text-4xl ">
+              {status}
+            </p>
           </div>
-          <GradientText size="text-3xl">{name}</GradientText>
+          <GradientText className="text-3xl text-center md:text-left">
+            {name}
+          </GradientText>
 
-          <div className="w-[80%] flex flex-col gap-4 mt-4">{children}</div>
+          <div className="w-[80%] flex flex-col gap-4 mt-4 max-w-[460px]">
+            {children}
+          </div>
 
           {/* <a href={buildLink}>
             <button className="bg-blue-600 font-bold hover:opacity-80 transition-all hover:scale-105  gap-3 flex justify-center items-center mt-12 py-2">

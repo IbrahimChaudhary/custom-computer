@@ -23,7 +23,7 @@ const Content = ({
   });
   const renderWords = () => {
     return (
-      <div className="hidden md:block">
+      <div className="">
         {wordsArray.map((word, idx) => {
           return (
             <div key={`word-${idx}`} className="inline-block">
@@ -60,9 +60,9 @@ const Content = ({
         }}
       >
         <div
-          className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold"
+          className="text-xs sm:text-base md:text-xl lg:text:3xl xl:text-5xl font-bold leading-10 justify-center flex items-center  text-center"
           style={{
-            whiteSpace: "nowrap",
+            whiteSpace: "wrap",
           }}
         >
           {renderWords()}{" "}
@@ -82,7 +82,7 @@ const Content = ({
           repeatType: "reverse",
         }}
         className={cn(
-          "block rounded-sm w-[4px]  h-10 xl:h-14 bg-blue-500",
+          "md:block rounded-sm w-[4px]  h-10 xl:h-14 bg-blue-500 hidden ",
           cursorClassName
         )}
       ></motion.span>

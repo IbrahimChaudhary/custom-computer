@@ -11,9 +11,10 @@ import mongoose from "mongoose";
 import AddSpecialBuildBtnWrapper from "@/components/add-special-build-btn";
 
 export default async function SpecialBuild({ params }: { params: any }) {
+  
   await connectdb();
 
-  const res = await SpecialBuilds.findOne({
+  const res = await SpecialBuilds.findById({
     _id: params.specialBuildID,
   });
   console.log(res, "specialBuild");

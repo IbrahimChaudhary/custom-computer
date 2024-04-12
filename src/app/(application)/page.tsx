@@ -26,7 +26,7 @@ const words = [
   },
   {
     text: "Today",
-    className: "text-white text-5xl lg:text-6xl",
+    className: "text-white text-5xl lg:text-6xl ",
   },
 ];
 export default async function Home() {
@@ -35,14 +35,11 @@ export default async function Home() {
       <div className="w-full relative -z-1 flex flex-col justify-center items-center  ">
         <Hero images={["/bg-image-2.jpg"]} className="h-screen w-full">
           <div className="text-white z-20 flex flex-col items-center px-8">
-            <h1 className="font-bold text-4xl sm:text-5xl text-center md:hidden">
+            {/* <h1 className="font-bold text-4xl sm:text-5xl text-center md:hidden">
               Empower Your Experience
-              <span className="text-primary">Build Your PC </span> Today
-            </h1>
-            <Content
-              words={words}
-              cursorClassName="bg-[#7ED348] hidden md:block"
-            />
+              <span className="text-primary">Build You7r PC </span> Today
+            </h1> */}
+            <Content words={words} cursorClassName="bg-[#7ED348] " />
             <p className="text-center font-semibold sm:text-lg md:text-2xl xl:w-2/3 mb-8">
               Design, customize, and build PC: Your journey to crafting the
               perfect machine starts here.Unlock the potential of your
@@ -60,10 +57,10 @@ export default async function Home() {
             </Link>
           </div>
         </Hero>
-        <div className="max-w-[1440px] w-full flex justify-center items-center">
+        <div className="max-w-[1440px] w-full flex justify-center items-center ">
           <HomeSectionOne />
         </div>
-        <div className="max-w-[1440px] w-full flex justify-center items-center">
+        <div className="max-w-[1440px] w-full flex justify-center items-center ">
           <HomeSectionTwo />
         </div>
       </div>

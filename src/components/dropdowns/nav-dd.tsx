@@ -26,19 +26,19 @@ export default async function NavDD() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className="bg-transparent text-white" asChild>
-        <Button variant="default" className="gap-2 ">
+        <Button variant="default" className="gap-1 ">
           <Avatar className="w-[30px] h-[30px]">
             <AvatarImage
               width={5}
               height={5}
               src={user?.imageUrl}
-              alt="@shadcn"
+              alt="user"
               className=" aspect-auto"
             />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
           <span>{user?.firstName}</span>
-          <ChevronDown></ChevronDown>
+          <ChevronDown className="h-4 w-4"></ChevronDown>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
