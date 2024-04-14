@@ -68,15 +68,18 @@ export default async function SingleBuild({
   return (
     <>
       <div className="pt-24 w-full max-w-[1440px] px-8 flex flex-col ">
-        <div className="flex justify-between w-full">
-          <div className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text  text-5xl font-bold">
+        <div className="flex flex-col sm:flex-row  justify-between w-full ">
+          <div className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text  text-5xl font-bold ">
             {build[0]?.build.name}
           </div>
           <div className="flex justify-center items-center gap-4">
             {/* <EditBuildButton />
             <DeleteBuildButton buildId={params.buildID} /> */}
             {!viewOnly ? (
-              <Link href={"/browse"}>
+              <Link
+                href={"/browse"}
+                className=" w-full sm:mt-0 mt-3 mb-10 sm:mb-0"
+              >
                 <Button className="text-white hover:opacity-80 hover:scale-95 transition-all">
                   Add Components
                 </Button>
@@ -85,7 +88,7 @@ export default async function SingleBuild({
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-4 w-full ">
+        <div className="flex flex-wrap gap-4 w-full sm:mt-8 ">
           {parts
             ? parts?.map((part: any) => {
                 return (
@@ -105,9 +108,9 @@ export default async function SingleBuild({
             : null}
         </div>
 
-        <div className="flex justify-between w-full text-6xl font-bold my-16">
+        <div className="flex justify-between w-full text-[2.15rem] sm:text-6xl font-bold my-16">
           <div>Total : </div>
-          <div className="border-b-2 pb-2 border-b-mono text-mono">
+          <div className="sm:border-b-2 pb-2 sm:border-b-mono text-mono">
             {total(parts)}$
           </div>
         </div>

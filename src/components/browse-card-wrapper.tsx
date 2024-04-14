@@ -25,9 +25,6 @@ export default function BrowseCardWrapper({
   useEffect(() => {
     const fetchData = async () => {
       const partsData = await giveAllParts(currentPage, userSelectedItem);
-      console.log("----------------------------------------");
-      console.log(partsData);
-      console.log("----------------------------------------");
 
       if (partsData) {
         setData(partsData);
@@ -37,14 +34,9 @@ export default function BrowseCardWrapper({
     fetchData();
   }, [userSelectedItem, currentPage]);
 
-  // const filteredData = data?.filter(
-  //   (item: any) =>
-  //     userSelectedItem === "none" || item.category === userSelectedItem
-  // );
-
   return (
     <>
-      <div className="flex gap-x-6 flex-wrap w-full justify-between  items-center">
+      <div className="flex  gap-x-6 flex-wrap w-full justify-between  items-center">
         {data ? (
           data?.map((item: any) => {
             return (

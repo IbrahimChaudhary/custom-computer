@@ -27,8 +27,8 @@ export default async function Forum() {
 
   return (
     <div className="w-full py-24 px-8 max-w-[1440px]">
-      <GradientText size="text-5xl">Forum</GradientText>
-      <div className="flex justify-center w-full items-end py-12 mb-6  ">
+      <GradientText className="text-5xl">Forum</GradientText>
+      <div className="flex sm:flex-row  w-full  py-12 mb-6 flex-col justify-start ">
         <QuestionInput />
         <BuildInput userInfo={JSON.parse(JSON.stringify(userInfo))} />
       </div>

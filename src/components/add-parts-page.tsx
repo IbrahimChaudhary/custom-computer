@@ -14,11 +14,10 @@ export default function AddPartsPage() {
   const adminSelectedCategory = useAdminStore(
     (state: any) => state.adminSelectedCategory
   );
-  console.log("global state", adminSelectedCategory);
   return (
     <>
       <div className="flex justify-between items-center flex-col w-full">
-        <div className="flex justify-between items-center w-full">
+        <div className="flex sm:flex-row flex-col justify-between sm:items-center items-start gap-3 sm:gap-0 w-full">
           <div className="text-4xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text font-semibold">
             add parts
           </div>

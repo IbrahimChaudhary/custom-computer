@@ -58,7 +58,7 @@ export default function BuildCard({
             <DeleteBuildButton buildId={buildId}></DeleteBuildButton>
           )}
           {allowEditBuild && <EditBuildButton></EditBuildButton>}
-          {allowGoToCheckout && <Checkout buildID={buildId} />}
+          {allowGoToCheckout && <Checkout buildName={name} buildID={buildId} />}
           {allowRemoveFromCart && (
             <RemoveFromCart look="small" buildID={buildId} />
           )}

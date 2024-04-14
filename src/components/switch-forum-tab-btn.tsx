@@ -7,9 +7,9 @@ export default function SwitchForumTabBtn() {
   const activeForumTab = useAdminStore((state) => state.activeForumTab);
   return (
     <>
-      <div className="flex justify-between ">
-        <div className="text-4xl">
-          {activeForumTab === "builds" ? "shared Builds" : "Questions"}
+      <div className="flex sm:flex-row flex-col gap-4  justify-between ">
+        <div className="text-3xl sm:text-4xl">
+          {activeForumTab === "builds" ? "Shared Builds" : "Questions"}
         </div>
         <div className="flex gap-4">
           <Button
@@ -18,7 +18,7 @@ export default function SwitchForumTabBtn() {
             } bg-secondary text-white  `}
             onClick={() => setActiveForumTab("questions")}
           >
-            show questions
+            questions
           </Button>
           <Button
             className={` ${
@@ -26,7 +26,7 @@ export default function SwitchForumTabBtn() {
             } bg-secondary text-white `}
             onClick={() => setActiveForumTab("builds")}
           >
-            show builds
+            builds
           </Button>
         </div>
       </div>

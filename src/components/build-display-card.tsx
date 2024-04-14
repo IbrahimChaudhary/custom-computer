@@ -24,10 +24,10 @@ export default function BuildDisplayCard({
   buildID,
 }: BuildDisplayCardPropsT) {
   return (
-    <div className="border rounded-md">
-      <div className="  flex bg-primary rounded-md p-3 text-white w-full flex-col">
-        <div className="flex items-center gap-10">
-          <div className="flex gap-4 items-center">
+    <div className="border rounded-md ">
+      <div className="  flex justify-start items-start bg-primary rounded-md p-3 text-white w-full flex-col">
+        <div className="flex  sm:flex-row flex-col gap-5 sm:gap-10 mb-5 sm:mb-0 ">
+          <div className="flex gap-4 justify-start  items-start">
             <Avatar className="w-8 h-8">
               <AvatarImage src={image} alt="image" />
               <AvatarFallback>CC</AvatarFallback>
@@ -37,8 +37,8 @@ export default function BuildDisplayCard({
               <div className="text-[0.75rem]">{email}</div>
             </div>
           </div>
-          <div className="text-lg ">
-            {name} shared a build :{" "}
+          <div className="text-lg  ">
+            {name} shared a build :
             <Link
               href={`/builds/${buildID}?view-only=true`}
               className=" border-b border-mono text-mono cursor-pointer pb-[0.125rem]"

@@ -11,7 +11,7 @@ export default function CreateANewBuildPage() {
     <>
       <div>
         <Dialog>
-          <DialogTrigger>
+          <DialogTrigger className="sm:mt-2">
             <Button
               borderRadius="0.8rem"
               className="   text-black text-bold  py-3 px-6 flex gap-2 border-none"

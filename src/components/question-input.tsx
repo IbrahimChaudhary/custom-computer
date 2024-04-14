@@ -54,14 +54,14 @@ export default function QuestionInput() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="w-2/3 space-y-6"
+            className="w-full sm:w-2/3 space-y-6"
           >
             <FormField
               control={form.control}
               name="question"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-md ">Question</FormLabel>
+                  <FormLabel className="text-md ">Ask Question</FormLabel>
                   <FormControl>
                     <Input
                       className="text-white border border-white "

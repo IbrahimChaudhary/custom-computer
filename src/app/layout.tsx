@@ -1,5 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { dark } from "@clerk/themes";
 import Nav from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { ClerkProvider } from "@clerk/nextjs";
@@ -57,7 +58,12 @@ export default async function RootLayout({
       >
         <div className="w-full">
           <NextTopLoaderProvider>
-            <ClerkProvider>
+            <ClerkProvider
+              appearance={{
+                baseTheme: dark,
+                variables: { colorPrimary: "#7Ed348" },
+              }}
+            >
               {children}
               <Toaster></Toaster>
             </ClerkProvider>

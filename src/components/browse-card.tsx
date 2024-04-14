@@ -78,7 +78,7 @@ export default function BrowseCard({
   return (
     <>
       <CardContainer className="inter-var pt-0  " containerClassName=" ">
-        <CardBody className=" relative group/card flex flex-col gap-3 hover:shadow-2xl hover:shadow-emerald-500/[0.1] bg-black border-white/[0.2]  justify-between  h-[450px] rounded-xl p-6 border w-[300px]  ">
+        <CardBody className=" relative group/card flex flex-col gap-3  hover:shadow-2xl hover:shadow-emerald-500/[0.1] bg-black border-white/[0.2]  justify-between  h-[450px] rounded-xl p-6 border max-w-[300px]  ">
           <div className="flex justify-between w-full gap-3">
             <div className="flex flex-col w-full  ">
               <CardItem
@@ -120,7 +120,8 @@ export default function BrowseCard({
                 <DialogTrigger>
                   <Info />
                 </DialogTrigger>
-                <DialogContent>
+
+                <DialogContent className="sm:w-full w-[280px]">
                   <MoreInfoDialog
                     partId={partId}
                     withImage={false}
@@ -148,7 +149,9 @@ export default function BrowseCard({
                   </DialogTrigger>
                   <DialogContent>
                     <div className="w-full flex justify-center my-3">
-                      <GradientText size="text-3xl">Your Builds</GradientText>
+                      <GradientText className="text-3xl">
+                        Your Builds
+                      </GradientText>
                     </div>
                     <AddToBuildDialog
                       partId={partId}

@@ -1,23 +1,20 @@
 import connectdb from "@/lib/connectdb";
 import SpecialBuilds from "@/schemas/server/special-builds-schema";
 import giveComponent from "@/actions/give-component";
-import GradientText from "@/components/gradient-text";
+import GradientTextL from "@/components/gradient-text";
 import BrowseCard from "@/components/browse-card";
 import { DialogContent, Dialog, DialogTrigger } from "@/components/ui/dialog";
 import BuidForm from "@/components/forms/build-form";
 import { Button } from "@/components/ui/moving-border";
 import { Plus } from "lucide-react";
-import mongoose from "mongoose";
 import AddSpecialBuildBtnWrapper from "@/components/add-special-build-btn";
 
 export default async function SpecialBuild({ params }: { params: any }) {
-  
   await connectdb();
 
   const res = await SpecialBuilds.findById({
     _id: params.specialBuildID,
   });
-  console.log(res, "specialBuild");
   const handleAGivePart = async (partId: string, partType: string) => {
     const part = await giveComponent(partId, partType);
 
@@ -25,15 +22,15 @@ export default async function SpecialBuild({ params }: { params: any }) {
   };
   return (
     <>
-      <div className="mt-24 ">
-        <div className="flex justify-between w-full">
-          <GradientText size="text-6xl">{res.buildName}</GradientText>
+      <div className="mt-20 p-8 ">
+        <div className="flex sm:flex-row flex-col sm:items-center items-start justify-start sm:justify-between w-full gap-3 sm:gap-0 mb-6">
+          <GradientTextL className="text-4xl">{res.buildName}</GradientTextL>
           <AddSpecialBuildBtnWrapper>
             <Dialog>
               <DialogTrigger>
                 <Button
                   borderRadius="0.8rem"
-                  className="   text-black text-bold  py-3 px-6 flex gap-2 border-none"
+                  className="    text-black text-bold  py-3 px-6 flex gap-2 border-none"
                 >
                   make it yours
                   <Plus />

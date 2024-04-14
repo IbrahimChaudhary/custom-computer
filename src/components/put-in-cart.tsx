@@ -21,10 +21,10 @@ export default function PutInCart({ buildID }: { buildID: string }) {
     <>
       <div
         onClick={putInCartHandler}
-        className="w-full border-2 cursor-pointer transition-all flex justify-center items-center text-5xl font-semibold group hover:bg-primary mt-4  py-8"
+        className="w-full border-2 cursor-pointer transition-all flex justify-center items-center sm:text-5xl font-semibold group hover:bg-primary mt-4  py-8 text-2xl"
       >
         <span>Add to Cart</span>
-        <ShoppingCart className="h-12 w-12 ml-4 group-hover:animate-bounce" />
+        <ShoppingCart className="sm:h-12 sm:w-12 sm:ml-4 ml-2 group-hover:animate-bounce" />
       </div>
 
       {/* <div>

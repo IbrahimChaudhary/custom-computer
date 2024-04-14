@@ -67,13 +67,15 @@ export function AddToBuildForm({
       <button
         disabled={isFormLoading}
         onClick={handleSubmit}
-        className="flex hover:opacity-85 hover:scale-95 transition-all text-black font-bold bg-mono gap-4 py-2 px-4 rounded-md mb-3"
+        className="flex hover:opacity-85 hover:scale-95 transition-all text-black font-bold bg-mono gap-4 py-2 px-4 rounded-md mb-3 min-w-[200px]   "
       >
         {isFormLoading ? null : <PlusCircle className="h-6 w-6 stroke-black" />}
         {isFormLoading ? (
           <Loader2 className="h-6 w-6 animate-spin stroke-black" />
         ) : null}
-        {buildName}
+        <span className="whitespace-normal">
+          {buildName}
+        </span>
       </button>
     </>
   );

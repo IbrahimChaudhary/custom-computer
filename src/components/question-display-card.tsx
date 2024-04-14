@@ -22,8 +22,8 @@ export default function QuestionDisplayCard({
 }: QuestionDisplayCardPropsT) {
   return (
     <div className="border rounded-md">
-      <div className="  flex bg-primary rounded-md p-3 text-white w-full flex-col">
-        <div className="flex items-center gap-10">
+      <div className="  flex bg-primary rounded-md p-3 text-white w-full flex-col ">
+        <div className="flex sm:flex-row flex-col sm:gap-10 gap-5 mb-5 sm:mb-0">
           <div className="flex gap-4 items-center">
             <Avatar className="w-8 h-8">
               <AvatarImage src={image} alt="image" />

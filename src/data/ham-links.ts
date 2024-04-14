@@ -13,7 +13,7 @@ export const hamLinks = [
   {
     id: nanoid(),
     title: "Browse",
-    link: "/Browse",
+    link: "/browse",
   },
   {
     id: nanoid(),

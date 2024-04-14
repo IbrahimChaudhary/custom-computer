@@ -2,7 +2,7 @@ import React from "react";
 import { RedirectToUserProfile } from "@clerk/nextjs";
 import { Hero } from "@/components/hero";
 import Link from "next/link";
-import Content from "@/components/content";
+import { TypewriterEffect, TypewriterEffectSmooth } from "@/components/content";
 import { MoveRight } from "lucide-react";
 import HomeSectionOne from "@/components/home-section-one";
 import HomeSectionTwo from "@/components/home-section-two";
@@ -24,10 +24,10 @@ const words = [
     text: "Dream PC",
     className: "text-[#7ED348] text-5xl lg:text-6xl",
   },
-  {
-    text: "Today",
-    className: "text-white text-5xl lg:text-6xl ",
-  },
+  // {
+  //   text: "Today",
+  //   className: "text-white text-5xl lg:text-6xl hidden md:flex ",
+  // },
 ];
 export default async function Home() {
   return (
@@ -39,8 +39,8 @@ export default async function Home() {
               Empower Your Experience
               <span className="text-primary">Build You7r PC </span> Today
             </h1> */}
-            <Content words={words} cursorClassName="bg-[#7ED348] " />
-            <p className="text-center font-semibold sm:text-lg md:text-2xl xl:w-2/3 mb-8">
+            <TypewriterEffect words={words} cursorClassName="bg-[#7ED348] " />
+            <p className="text-center font-semibold sm:text-lg md:text-2xl xl:w-2/3 mb-8 mt-4">
               Design, customize, and build PC: Your journey to crafting the
               perfect machine starts here.Unlock the potential of your
               imagination with BuildPC, the gateway to personalized computing

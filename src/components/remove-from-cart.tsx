@@ -32,10 +32,10 @@ export default function RemoveFromCart({
     return (
       <div
         onClick={handleRemoveFromCart}
-        className="w-full border-2 cursor-pointer transition-all flex justify-center items-center text-5xl font-semibold group hover:bg-destructive mt-4  py-8"
+        className="w-full border-2 cursor-pointer transition-all flex justify-center items-center sm:text-5xl font-semibold group hover:bg-destructive mt-4 text-2xl  py-8 px-2 text-center"
       >
         <span>Remove from Cart</span>
-        <Delete className="h-12 w-12 ml-4 " />
+        <Delete className="sm:h-12 sm:w-12 sm:ml-4 ml-2 hidden  sm:flex" />
       </div>
     );
   }

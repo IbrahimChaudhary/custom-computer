@@ -12,13 +12,21 @@ export default function Sidebar() {
   const isActive = (path: string) => path === pathname;
   return (
     <>
-      <div className="w-[20vw] border-r h-screen max-h-screen ">
-        <div className="h-[13%] text-black text-2xl flex   font-bold  pl-6 items-center border-b-2 ">
+      <div className="lg:w-[20vw] border-r h-screen max-h-screen ">
+        <div className="h-[13%] text-black text-2xl flex   font-bold   items-center border-b-2 ">
+          <Image
+            src={"/half-logo.png"}
+            alt="custom pc builder"
+            width={50}
+            height={50}
+            className="flex lg:hidden ml-2"
+          />
           <Image
             src={"/logo.png"}
             alt="custom pc builder"
-            width={140}
-            height={140}
+            width={130}
+            height={130}
+            className="hidden lg:flex ml-6"
           />
         </div>
         <div className="flex flex-col justify-between h-[87%]">
@@ -26,37 +34,37 @@ export default function Sidebar() {
             <Link
               className={`hover:bg-[#7ED348] ${
                 isActive("/dashboard") ? "bg-mono text-black" : null
-              } transition-all ease-linear justify-end items-center hover:text-black w-full rounded-lg py-2 pl-6  flex flex-row-reverse gap-4 `}
+              } transition-all ease-linear justify-center lg:justify-end items-center hover:text-black w-auto lg:w-full rounded-lg py-2 lg:pl-6 px-3 lg:pr-0  flex flex-row-reverse gap-4 `}
               href="/dashboard"
             >
-              dashboard
+              <span className="lg:flex hidden">dashboard</span>
               <BarChartBig></BarChartBig>
             </Link>
 
             <Link
               className={`hover:bg-[#7ED348] ${
                 isActive("/dashboard/add-parts") ? "bg-mono text-black" : null
-              } transition-all ease-linear justify-end items-center hover:text-black w-full rounded-lg py-2 pl-6  flex flex-row-reverse gap-4 `}
+              } transition-all ease-linear justify-end items-center hover:text-black w-auto lg:w-full rounded-lg py-2 lg:pl-6 px-3 lg:pr-0  flex flex-row-reverse gap-4 `}
               href="/dashboard/add-parts"
             >
-              add parts
+              <span className="lg:flex hidden">add parts</span>
               <PlusCircle></PlusCircle>
             </Link>
             <Link
               className={`hover:bg-[#7ED348] ${
                 isActive("/dashboard/parts") ? "bg-mono text-black" : null
-              } transition-all ease-linear justify-end items-center hover:text-black w-full rounded-lg py-2 pl-6  flex flex-row-reverse gap-4 `}
+              } transition-all ease-linear justify-end items-center hover:text-black w-auto lg:w-full rounded-lg py-2 lg:pl-6 px-3 lg:pr-0  flex flex-row-reverse gap-4 `}
               href="/dashboard/parts"
             >
-              all parts
+              <span className="lg:flex hidden">all parts</span>
               <Computer></Computer>
             </Link>
           </div>
           <Link
-            className={`hover:bg-[#7ED348] my-8 w-[90%] mx-2 font-bold   transition-all ease-linear justify-end items-center hover:text-black  rounded-lg py-2 pl-6  flex flex-row-reverse gap-4 `}
+            className={`hover:bg-[#7ED348] my-8 w-auto lg:w-[90%] mx-2 font-bold   transition-all ease-linear justify-end items-center hover:text-black  rounded-lg py-2 lg:pl-6 px-3 lg:pr-0  flex flex-row-reverse gap-4 `}
             href="/dashboard"
           >
-            back to website
+            <span className="lg:flex hidden">back to website</span>
             <ChevronLeft></ChevronLeft>
           </Link>
         </div>

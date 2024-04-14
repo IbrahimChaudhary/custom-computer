@@ -25,10 +25,6 @@ export default function MoreInfoDialog({
 
     fetchData();
   }, [partId]);
-  console.log("-----------------------------------");
-  console.log(partId, "partId");
-  console.log(category, "category#############");
-  console.log("-----------------------------------");
 
   return (
     <>
@@ -37,7 +33,7 @@ export default function MoreInfoDialog({
           <Loader2 className="animate-spin w-8 h-8" />
         </div>
       ) : (
-        <div className="pt-4">
+        <div className="pt-4 ">
           {data &&
             Object.entries(data).map(([key, value], index) => {
               if (key !== "image" && key !== "_id" && key !== "created_at") {

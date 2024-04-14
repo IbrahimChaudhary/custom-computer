@@ -17,7 +17,7 @@ export default function ReplyCard({
 }: ReplyCardPropsT) {
   return (
     <>
-      <div className="flex items-center gap-10 w-[95%] p-3">
+      <div className="flex sm:flex-row flex-col justify-start items-start gap-5 sm:gap-10 w-[95%] p-3">
         <div className="flex gap-4 items-center">
           <Avatar className="w-7 h-7 ">
             <AvatarImage src={image} alt="image" className="" />

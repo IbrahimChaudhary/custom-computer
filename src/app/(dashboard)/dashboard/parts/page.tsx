@@ -10,6 +10,7 @@ import {
 import giveAllParts from "@/lib/giveAllParts";
 import showAllBuildsOfAUser from "@/lib/showAllBuildsOfAUser";
 import UserSelectCategoryWrapper from "@/components/user-select-category-wrapper";
+import GradientTextL from "@/components/gradient-text";
 import BrowseCardWrapper from "@/components/browse-card-wrapper";
 import { AdminVerification } from "@/components/admin-verification";
 export const metadata = {
@@ -22,11 +23,9 @@ export default async function Parts({ searchParams }: { searchParams: any }) {
     <>
       <AdminVerification />
       <div className="pt-6 w-full px-8 max-w-[1440px] ">
-        <div className="w-full flex justify-between mb-8 flex-row-reverse">
+        <div className="w-full flex sm:flex-row-reverse flex-col-reverse sm:justify-between mb-8  justify-center items-start sm:items-start">
           <UserSelectCategoryWrapper />
-          <h1 className="text-6xl bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text font-semibold">
-            Components
-          </h1>
+          <GradientTextL className="text-5xl md:text-6xl">Browse</GradientTextL>
         </div>
 
         <BrowseCardWrapper

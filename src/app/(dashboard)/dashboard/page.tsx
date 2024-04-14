@@ -43,30 +43,32 @@ export default async function Dashboard() {
     <>
       <AdminVerification />
       <div className="bg-slate-950 w-full px-8 pt-3">
-        <GradientText size="text-6xl">Orders</GradientText>
+        <GradientText className="text-5xl">Orders</GradientText>
 
         <div className="w-full flex-col flex justify-center items-center mt-16 gap-8 ">
-          <div className="flex gap-6 w-full justify-center items-center ">
-            <StatCard
-              look="bg-yellow-400"
-              title="shipped"
-              value={shippedOrdersCount?.toString()}
-            />
-            <StatCard
-              title="Checked out"
-              look="bg-blue-800"
-              value={checkedOrdersCount?.toString()}
-            />
-            <StatCard
-              look="bg-lime-500"
-              title="Approved"
-              value={approvedOrdersCount?.toString()}
-            />
-            <StatCard
-              look="bg-red-700"
-              title="Rejected"
-              value={rejectedOrdersCount?.toString()}
-            />
+          <div className="flex w-full justify-center items-center ">
+            <div className=" flex w-[90%] gap-6  justify-start  items-center flex-wrap ">
+              <StatCard
+                look="bg-yellow-400"
+                title="shipped"
+                value={shippedOrdersCount?.toString()}
+              />
+              <StatCard
+                title="Checked out"
+                look="bg-blue-800"
+                value={checkedOrdersCount?.toString()}
+              />
+              <StatCard
+                look="bg-lime-500"
+                title="Approved"
+                value={approvedOrdersCount?.toString()}
+              />
+              <StatCard
+                look="bg-red-700"
+                title="Rejected"
+                value={rejectedOrdersCount?.toString()}
+              />
+            </div>
           </div>
 
           <div className=" flex w-[90%] overflow-y-auto overflow-x-auto ">

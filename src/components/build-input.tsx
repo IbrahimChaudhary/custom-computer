@@ -2,7 +2,7 @@
 import { buildT } from "@/types/build-type";
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 import addBuildAction from "./add-build";
-import { Button as SpecialButon } from "./ui/moving-border";
+import { Button } from "./ui/button";
 import { toast } from "./ui/use-toast";
 import { Share2 } from "lucide-react";
 export default function BuildInput({ userInfo }: { userInfo: any }) {
@@ -20,16 +20,12 @@ export default function BuildInput({ userInfo }: { userInfo: any }) {
   return (
     <>
       <Dialog>
-        <DialogTrigger>
-          <SpecialButon
-            borderRadius="0.8rem"
-            className=" transition-all hover:scale-95   text-black text-bold w-48   py-3 px-6 flex gap-2 border-none"
-          >
+        <DialogTrigger className=" flex justify-start sm:items-end mt-4 sm:mt-0">
+          <Button className=" flex gap-3 text-white">
             share build
             <Share2 />
-          </SpecialButon>
+          </Button>
         </DialogTrigger>
-
         <DialogContent>
           <div className="flex  flex-wrap font-bold gap-3">
             {userBuilds?.map((builds: buildT) => {
